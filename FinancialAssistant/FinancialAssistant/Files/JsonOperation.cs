@@ -42,6 +42,15 @@ namespace FinancialAssistant.Files
         {
             return JsonConvert.SerializeObject(objJsong);
         }
+        /// <summary>
+        /// 多组Json序列化
+        /// </summary>
+        /// <param name="strJson"></param>
+        /// <returns></returns>
+        public static string Serialize(List<T> objJsong)
+        {
+            return JsonConvert.SerializeObject((List<T>)objJsong);
+        }
     }
     public class JsonOperation
     {
