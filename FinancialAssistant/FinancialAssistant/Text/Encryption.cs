@@ -185,5 +185,57 @@ namespace FinancialAssistant.Text
             Data = new string(pToEncrypt_Bat);//Char转string
             return Data;
         }
+        /// <summary>
+        /// 基础AES加密
+        /// </summary>
+        /// <param name="toEncrypt">待加密数据</param>
+        /// <param name="sKey">密匙</param>
+        /// <returns></returns>
+        public static string AESEncrypt(string toEncrypt,string sKey)
+        {
+            //判断密匙长度，如低于32位则补满，高于32则区前32位
+            if (sKey.Length < 32)
+                sKey = sKey.PadRight(32, '#');
+            else
+                sKey = sKey.Substring(0, 32);
+            byte[] keyArray = UTF8Encoding.UTF8.GetBytes(sKey);
+            byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
+
+            RijndaelManaged rDel = new RijndaelManaged();
+            rDel.Key = keyArray;
+            rDel.Mode = CipherMode.ECB;
+            rDel.Padding = PaddingMode.PKCS7;
+
+            ICryptoTransform cTransform = rDel.CreateEncryptor();
+            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+            return Convert.ToBase64String(resultArray, 0, resultArray.Length);
+        }
+        /// <summary>
+        /// 基础AES解密
+        /// </summary>
+        /// <param name="toDecrypt">待解密数据</param>
+        /// <param name="sKey">密匙</param>
+        /// <returns></returns>
+        public static string AESDecrypt(string toDecrypt, string sKey)
+        {
+            //判断密匙长度，如低于32位则补满，高于32则区前32位
+            if (sKey.Length < 32)
+                sKey = sKey.PadRight(32, '#');
+            else
+                sKey = sKey.Substring(0, 32);
+            byte[] keyArray = UTF8Encoding.UTF8.GetBytes(sKey);
+            byte[] toEncryptArray = Convert.FromBase64String(toDecrypt);
+
+            RijndaelManaged rDel = new RijndaelManaged();
+            rDel.Key = keyArray;
+            rDel.Mode = CipherMode.ECB;
+            rDel.Padding = PaddingMode.PKCS7;
+
+            ICryptoTransform cTransform = rDel.CreateDecryptor();
+            byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
+
+            return UTF8Encoding.UTF8.GetString(resultArray);
+        }
     }
 }

@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -85,11 +88,16 @@
       <Project>{daf7470f-655e-4481-9502-01e48b9a4565}</Project>
       <Name>FinancialAssistant.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FinancialAssistant.Widget\FinancialAssistant.Widget.csproj">
+      <Project>{2e7c90c7-7fe1-4ccf-a9b9-4b5dd9108502}</Project>
+      <Name>FinancialAssistant.Widget</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FinancialAssistant\FinancialAssistant.csproj">
       <Project>{bc6a8f07-7e5f-464d-98d9-a81918f176c6}</Project>
       <Name>FinancialAssistant</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

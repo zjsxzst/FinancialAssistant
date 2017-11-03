@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialAssistant.Services
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialAssistant.WinFrom", "FinancialAssistant.WinFrom\FinancialAssistant.WinFrom.csproj", "{0F2B16D1-A35D-4060-A2E1-EF867291534E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialAssistant.Widget", "FinancialAssistant.Widget\FinancialAssistant.Widget.csproj", "{2E7C90C7-7FE1-4CCF-A9B9-4B5DD9108502}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{0F2B16D1-A35D-4060-A2E1-EF867291534E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F2B16D1-A35D-4060-A2E1-EF867291534E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F2B16D1-A35D-4060-A2E1-EF867291534E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E7C90C7-7FE1-4CCF-A9B9-4B5DD9108502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7C90C7-7FE1-4CCF-A9B9-4B5DD9108502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7C90C7-7FE1-4CCF-A9B9-4B5DD9108502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7C90C7-7FE1-4CCF-A9B9-4B5DD9108502}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
