@@ -49,7 +49,7 @@ namespace FinancialAssistant.WinFrom
             {
                 if (string.IsNullOrWhiteSpace(VID))
                     VID = PWD;
-                MTB_ContentCode.Text = Encryption.TransformationMD5(MTB_Original.Text);
+                MTB_ContentCode.Text = Encryption.SuperAESEncrypt(MTB_Original.Text,PWD);
             }
         }
 
@@ -62,8 +62,7 @@ namespace FinancialAssistant.WinFrom
             {
                 if (string.IsNullOrWhiteSpace(VID))
                     VID = PWD;
-                MTB_ContentCode.Text = 
-                MTB_Original.Text = Encryption.AESDecrypt(MTB_ContentCode.Text, PWD);
+                MTB_Original.Text = Encryption.SuperAESDecrypt(MTB_ContentCode.Text, PWD);
             }
         }
 

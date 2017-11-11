@@ -39,10 +39,18 @@ namespace FinancialAssistant.Text
 
             byte[] inputByteArray = Encoding.Default.GetBytes(pToEncrypt);
             //byte[]　inputByteArray=Encoding.Unicode.GetBytes(pToEncrypt);
-            if (sKey.Length < 8 || sKey.Length > 8)
-                return "密匙只能为8位长度";
-            if (sIV.Length < 8 || sIV.Length > 8)
-                return "偏移量只能为8位长度";
+            //if (sKey.Length < 8 || sKey.Length > 8)
+            //    return "密匙只能为8位长度";
+            //if (sIV.Length < 8 || sIV.Length > 8)
+            //    return "偏移量只能为8位长度";
+            if (sKey.Length < 8)
+                sKey = sKey.PadRight(8, '#');
+            else
+                sKey = sKey.Substring(0, 8);
+            if (sIV.Length < 8)
+                sIV = sIV.PadRight(8, '#');
+            else
+                sIV = sIV.Substring(0, 8);
             des.Key = ASCIIEncoding.ASCII.GetBytes(sKey); //建立加密对象的密钥和偏移量
             des.IV = ASCIIEncoding.ASCII.GetBytes(sIV);  //原文使用ASCIIEncoding.ASCII方法的GetBytes方法
             MemoryStream ms = new MemoryStream();   //使得输入密码必须输入英文文本
@@ -118,10 +126,18 @@ namespace FinancialAssistant.Text
 
             try
             {
-                if (sKey.Length < 8 || sKey.Length > 8)
-                    return "密匙只能为8位长度";
-                if (sIV.Length < 8 || sIV.Length > 8)
-                    return "偏移量只能为8位长度";
+                //if (sKey.Length < 8 || sKey.Length > 8)
+                //    return "密匙只能为8位长度";
+                //if (sIV.Length < 8 || sIV.Length > 8)
+                //    return "偏移量只能为8位长度";
+                if (sKey.Length < 8)
+                    sKey = sKey.PadRight(8, '#');
+                else
+                    sKey = sKey.Substring(0, 8);
+                if (sIV.Length < 8)
+                    sIV = sIV.PadRight(8, '#');
+                else
+                    sIV = sIV.Substring(0, 8);
                 DESCryptoServiceProvider des = new DESCryptoServiceProvider();
                 byte[] inputByteArray = new byte[pToDecrypt.Length / 2];
                 for (int x = 0; x < pToDecrypt.Length / 2; x++)
@@ -138,7 +154,7 @@ namespace FinancialAssistant.Text
                 StringBuilder ret = new StringBuilder();
 
             }
-            catch
+            catch(Exception ex)
             {
 
             }
@@ -212,6 +228,27 @@ namespace FinancialAssistant.Text
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
         /// <summary>
+        /// 二次AEC加密
+        /// </summary>
+        /// <param name="toEncrypt"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
+        public static string SuperAESEncrypt(string toEncrypt, string sKey)
+        {
+            string Time = DataTimes.StrConvertDateTimeToInt(DateTime.Now);
+            if(Time.Length>10)
+                Time = Time.Substring(1, 10);
+            else
+            {
+                Time = Time.PadRight(10, '0');
+                Time = Time.Substring(0, 10);
+            }
+                
+            toEncrypt = Encrypt(toEncrypt, Time, Time);
+            toEncrypt =Time + toEncrypt;
+            return AESEncrypt(toEncrypt, sKey);
+        }
+        /// <summary>
         /// 基础AES解密
         /// </summary>
         /// <param name="toDecrypt">待解密数据</param>
@@ -236,6 +273,18 @@ namespace FinancialAssistant.Text
             byte[] resultArray = cTransform.TransformFinalBlock(toEncryptArray, 0, toEncryptArray.Length);
 
             return UTF8Encoding.UTF8.GetString(resultArray);
+        }
+        /// <summary>
+        /// 二次AES解密
+        /// </summary>
+        /// <param name="toDecrypt"></param>
+        /// <param name="sKey"></param>
+        /// <returns></returns>
+        public static string SuperAESDecrypt(string toDecrypt, string sKey)
+        {
+            toDecrypt = AESDecrypt(toDecrypt, sKey);
+            string pwd = toDecrypt.Substring(0, 10);
+            return DesDecrypt(toDecrypt.Substring(10, toDecrypt.Length - 10), pwd, pwd); 
         }
     }
 }
