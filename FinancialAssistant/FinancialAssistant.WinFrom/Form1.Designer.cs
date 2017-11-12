@@ -98,7 +98,7 @@
             this.MTB_VID.Name = "MTB_VID";
             this.MTB_VID.Size = new System.Drawing.Size(189, 21);
             this.MTB_VID.TabIndex = 9;
-            this.MTB_VID.WaterText = "请输入8位偏移量";
+            this.MTB_VID.WaterText = "请输入偏移量";
             // 
             // MTB_PWD
             // 
@@ -106,7 +106,7 @@
             this.MTB_PWD.Name = "MTB_PWD";
             this.MTB_PWD.Size = new System.Drawing.Size(189, 21);
             this.MTB_PWD.TabIndex = 4;
-            this.MTB_PWD.WaterText = "请输入8位密匙";
+            this.MTB_PWD.WaterText = "请输入密匙";
             this.MTB_PWD.TextChanged += new System.EventHandler(this.MTB_PWD_TextChanged);
             // 
             // MTB_ContentCode

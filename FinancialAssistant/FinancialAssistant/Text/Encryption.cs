@@ -33,7 +33,7 @@ namespace FinancialAssistant.Text
         /// <param name="sKey">密匙</param>
         /// <param name="sIV">偏移量</param>
         /// <returns>密匙、偏移量只能为8位</returns>
-        public static string Encrypt(string pToEncrypt, string sKey, string sIV)
+        public static string DESEncrypt(string pToEncrypt, string sKey, string sIV)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider(); //把字符串放到byte数组中
 
@@ -85,7 +85,7 @@ namespace FinancialAssistant.Text
                 pToEncrypt_Bat[i] = Convert.ToChar(num);
             }
             pToEncrypt = new string(pToEncrypt_Bat);//Char转string
-            string Data = Encrypt(pToEncrypt, sKey, sIV);
+            string Data = DESEncrypt(pToEncrypt, sKey, sIV);
             pToEncrypt_Bat = Data.ToCharArray();
             for (int i = 0; i < pToEncrypt_Bat.Length; i++)//位移i位
             {
@@ -95,23 +95,8 @@ namespace FinancialAssistant.Text
                 pToEncrypt_Bat[i] = Convert.ToChar(Convert.ToInt32(num));
             }
             pToEncrypt = new string(pToEncrypt_Bat);//Char转string
-            Data = Encrypt(pToEncrypt, sKey, sIV);
+            Data = DESEncrypt(pToEncrypt, sKey, sIV);
             return Data;
-        }
-        /// <summary>
-        /// DES加密结果
-        /// </summary>
-        /// <param name="pToEncrypt">待加密数据</param>
-        /// <param name="sKey">密匙</param>
-        /// <param name="sIV">偏移量</param>
-        /// <param name="Data">加密后数据</param>
-        /// <returns>密匙、偏移量只能为8位</returns>
-        public static bool EncryptionResults(string pToEncrypt, string sKey, string sIV, ref string Data)
-        {
-            Data = Encrypt(pToEncrypt, sKey, sIV);
-            if (Data == "密匙只能为8位长度" || Data == "偏移量只能为8位长度")
-                return false;
-            return true;
         }
         /// <summary>
         /// 基础DES解密
@@ -244,7 +229,7 @@ namespace FinancialAssistant.Text
                 Time = Time.Substring(0, 10);
             }
                 
-            toEncrypt = Encrypt(toEncrypt, Time, Time);
+            toEncrypt = DESEncrypt(toEncrypt, Time, Time);
             toEncrypt =Time + toEncrypt;
             return AESEncrypt(toEncrypt, sKey);
         }

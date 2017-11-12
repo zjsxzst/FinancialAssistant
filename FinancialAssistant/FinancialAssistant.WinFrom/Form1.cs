@@ -30,14 +30,22 @@ namespace FinancialAssistant.WinFrom
             VID = MTB_VID.Text;
             if (!string.IsNullOrWhiteSpace(MTB_Original.Text) && !string.IsNullOrWhiteSpace(PWD))
             {
-                //if (string.IsNullOrWhiteSpace(VID))
-                //    VID = PWD;
-                //VID=Encryption.GetAESsIV();
-                MTB_ContentCode.Text = Encryption.AESEncrypt(MTB_Original.Text, PWD);
-                    /* Encryption.AESEncrypt(MTB_Original.Text, MTB_PWD.Text, VID);*/
-                MTB_VID.Text = VID;
+                if (string.IsNullOrWhiteSpace(VID))
+                    VID = PWD;
+                switch(comboBox1.Text)
+                {
+                    case "DES":
+                        MTB_ContentCode.Text = Encryption.DESEncrypt(MTB_Original.Text, PWD, VID);
+                        MTB_VID.Text = VID;
+                        break;
+                    case "AES":
+                        MTB_ContentCode.Text = Encryption.AESEncrypt(MTB_Original.Text, PWD);
+                        break;
+                    case "MD5":
+                        MTB_ContentCode.Text = Encryption.TransformationMD5(MTB_Original.Text);
+                        break;
+                }
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -49,7 +57,20 @@ namespace FinancialAssistant.WinFrom
             {
                 if (string.IsNullOrWhiteSpace(VID))
                     VID = PWD;
-                MTB_ContentCode.Text = Encryption.SuperAESEncrypt(MTB_Original.Text,PWD);
+                switch (comboBox1.Text)
+                {
+                    case "DES":
+                        
+                        MTB_ContentCode.Text = Encryption.SuperEncrypt(MTB_Original.Text, PWD, VID);
+                        MTB_VID.Text = VID;
+                        break;
+                    case "AES":
+                        MTB_ContentCode.Text = Encryption.SuperAESEncrypt(MTB_Original.Text, PWD);
+                        break;
+                    default:
+                        MessageBox.Show("该方法没有高级加密方式！");
+                        break;
+                }
             }
         }
 
@@ -62,7 +83,19 @@ namespace FinancialAssistant.WinFrom
             {
                 if (string.IsNullOrWhiteSpace(VID))
                     VID = PWD;
-                MTB_Original.Text = Encryption.SuperAESDecrypt(MTB_ContentCode.Text, PWD);
+                switch (comboBox1.Text)
+                {
+                    case "DES":
+                        MTB_Original.Text = Encryption.DesDecrypt(MTB_ContentCode.Text, PWD, VID);
+                        MTB_VID.Text = VID;
+                        break;
+                    case "AES":
+                        MTB_Original.Text = Encryption.AESDecrypt(MTB_ContentCode.Text, PWD);
+                        break;
+                    default:
+                        MessageBox.Show("该方法没有解密方式！");
+                        break;
+                }
             }
         }
 
@@ -75,8 +108,19 @@ namespace FinancialAssistant.WinFrom
             {
                 if (string.IsNullOrWhiteSpace(VID))
                     VID = PWD;
-                Random ran = new Random();
-                MTB_Original.Text= ran.Next(100, 999).ToString()+DataTimes.StrConvertDateTimeToInt(DateTime.Now);
+                switch (comboBox1.Text)
+                {
+                    case "DES":
+                        MTB_Original.Text = Encryption.SuperDesDecrypt(MTB_ContentCode.Text, PWD, VID);
+                        MTB_VID.Text = VID;
+                        break;
+                    case "AES":
+                        MTB_Original.Text = Encryption.SuperAESDecrypt(MTB_ContentCode.Text, PWD);
+                        break;
+                    default:
+                        MessageBox.Show("该方法没有解密方式！");
+                        break;
+                }
             }
         }
 
