@@ -28,7 +28,7 @@ namespace FinancialAssistant.WinFrom
             string PWD = "", VID = "";
             PWD = MTB_PWD.Text;
             VID = MTB_VID.Text;
-            if (!string.IsNullOrWhiteSpace(MTB_Original.Text) && !string.IsNullOrWhiteSpace(PWD))
+            if ((!string.IsNullOrWhiteSpace(MTB_Original.Text) && !string.IsNullOrWhiteSpace(PWD))|| comboBox1.Text== "MD5")
             {
                 if (string.IsNullOrWhiteSpace(VID))
                     VID = PWD;
