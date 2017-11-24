@@ -16,7 +16,8 @@ namespace FinancialAssistant.WinFrom
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FM_Login());
+            //Application.Run(new Form1());
         }
     }
 }

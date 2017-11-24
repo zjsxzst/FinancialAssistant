@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,11 +28,11 @@ namespace FinancialAssistant.Data
     }
     public class SqlProcessing<T> where T : new()
     {
-        public static string Flie_Path = System.IO.Directory.GetCurrentDirectory() + "\\Data\\DATA.accdb";//当前路径
+        //public static string Flie_Path = System.IO.Directory.GetCurrentDirectory() + "\\Data\\DATA.accdb";//当前路径
         public static string PassWD = null;//获取数据库密码
         private static DataTable dt;
         private static string connStr;//= String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0}; Jet OLEDB:Database Password ={1}", Flie_Path, PassWD);//;
-        private static OleDbConnection con = new OleDbConnection(connStr);   // TODO: 在此处添加构造函数逻辑
+        private static SqlConnection con = new SqlConnection(connStr);   // TODO: 在此处添加构造函数逻辑
 
         public static object TextProcessing { get; private set; }
 
@@ -41,16 +42,18 @@ namespace FinancialAssistant.Data
             string data = "";
             XmlOperate<SqlData>.DSerialize(ref sd, "Config.xml", ref data);
             PassWD = Encryption.SuperDesDecrypt(sd.honeybee, "zjsxzsta", "zjsxzstb");
-            connStr = String.Format(Encryption.SuperDesDecrypt(sd.connStr, "zjsxzsta", "zjsxzstb"), Flie_Path, PassWD);
-            con = new OleDbConnection(connStr);
+            connStr = String.Format(Encryption.SuperDesDecrypt(sd.connStr, "zjsxzsta", "zjsxzstb"), PassWD);
+            con = new SqlConnection(connStr);
             //SqlProcessing<SqlData>.Init(sd.connStr, sd.honeybee);
         }
         public static IList<T> ExeQuerys(string sql)
         {
             Init();
-            OleDbDataAdapter oda = new OleDbDataAdapter(sql, con);
+            if (con.State == ConnectionState.Closed)
+                con.Open();
+            SqlDataAdapter cmd = new SqlDataAdapter(sql, con);
             dt = new DataTable();
-            oda.Fill(dt);
+            cmd.Fill(dt);
             con.Close();
             if (dt.Rows.Count > 0)
                 return Transform<T>.DataTableToList(dt);
@@ -150,19 +153,19 @@ namespace FinancialAssistant.Data
     }
     public class SqlProcessing
     {
-        public static string Flie_Path = System.IO.Directory.GetCurrentDirectory() + "\\Data\\DATA.accdb";//当前路径
+        //public static string Flie_Path = System.IO.Directory.GetCurrentDirectory() + "\\Data\\DATA.accdb";//当前路径
         public static string PassWD = null;//获取数据库密码
         private static DataTable dt;
         private static string connStr;//= String.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0}; Jet OLEDB:Database Password ={1}", Flie_Path, PassWD);//;
-        private static OleDbConnection con = new OleDbConnection(connStr);   // TODO: 在此处添加构造函数逻辑
+        private static SqlConnection con = new SqlConnection(connStr);   // TODO: 在此处添加构造函数逻辑
         private static void Init()
         {
             SqlData sd = new SqlData();
             string data = "";
             XmlOperate<SqlData>.DSerialize(ref sd, "Config.xml", ref data);
             PassWD = Encryption.SuperDesDecrypt(sd.honeybee, "abcdefgh", "abcdefgh");
-            connStr = String.Format(Encryption.SuperDesDecrypt(sd.connStr, "abcdefgh", "abcdefgh"), Flie_Path, PassWD);
-            con = new OleDbConnection(connStr);
+            connStr = String.Format(Encryption.SuperDesDecrypt(sd.connStr, "abcdefgh", "abcdefgh"), PassWD);
+            con = new SqlConnection(connStr);
             //SqlProcessing<SqlData>.Init(sd.connStr, sd.honeybee);
         }
 
@@ -171,7 +174,7 @@ namespace FinancialAssistant.Data
             Init();
             //if (con.State == ConnectionState.Closed)
             //    con.Open();
-            OleDbDataAdapter oda = new OleDbDataAdapter(sql, con);
+            SqlDataAdapter oda = new SqlDataAdapter(sql, con);
             dt = new DataTable();
             oda.Fill(dt);
             con.Close();
@@ -182,7 +185,7 @@ namespace FinancialAssistant.Data
             Init();
             if (con.State == ConnectionState.Closed)
                 con.Open();
-            OleDbCommand cmd = new OleDbCommand(sql, con);
+            SqlCommand cmd = new SqlCommand(sql, con);
             if (cmd.ExecuteNonQuery() > 0)
             {
                 con.Close();
@@ -201,8 +204,8 @@ namespace FinancialAssistant.Data
             {
                 con.Open();
             }
-            OleDbTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
-            OleDbCommand cmd = new OleDbCommand();
+            SqlTransaction trans = con.BeginTransaction(IsolationLevel.ReadCommitted);
+            SqlCommand cmd = new SqlCommand();
             cmd.Transaction = trans;
             cmd.Connection = con;
             try
