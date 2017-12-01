@@ -32,8 +32,8 @@
             this.MTB_PWD = new FinancialAssistant.Widget.Text.MarkTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BT_Save = new System.Windows.Forms.Button();
+            this.BT_ESC = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MTB_UserName
@@ -71,33 +71,33 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "密  码：";
             // 
-            // button1
+            // BT_Save
             // 
-            this.button1.Location = new System.Drawing.Point(42, 99);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "登录";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BT_Save.Location = new System.Drawing.Point(42, 99);
+            this.BT_Save.Name = "BT_Save";
+            this.BT_Save.Size = new System.Drawing.Size(75, 23);
+            this.BT_Save.TabIndex = 4;
+            this.BT_Save.Text = "登录";
+            this.BT_Save.UseVisualStyleBackColor = true;
+            this.BT_Save.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // BT_ESC
             // 
-            this.button2.Location = new System.Drawing.Point(207, 99);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "取消";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.BT_ESC.Location = new System.Drawing.Point(207, 99);
+            this.BT_ESC.Name = "BT_ESC";
+            this.BT_ESC.Size = new System.Drawing.Size(75, 23);
+            this.BT_ESC.TabIndex = 5;
+            this.BT_ESC.Text = "取消";
+            this.BT_ESC.UseVisualStyleBackColor = true;
+            this.BT_ESC.Click += new System.EventHandler(this.BT_ESC_Click);
             // 
             // FM_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(327, 154);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BT_ESC);
+            this.Controls.Add(this.BT_Save);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MTB_PWD);
@@ -115,7 +115,7 @@
         private Widget.Text.MarkTextBox MTB_PWD;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BT_Save;
+        private System.Windows.Forms.Button BT_ESC;
     }
 }

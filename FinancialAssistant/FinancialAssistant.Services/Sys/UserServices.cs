@@ -14,7 +14,7 @@ namespace FinancialAssistant.Services.Sys
         private UniversalServices UniversalServices=new UniversalServices();
         public bool VerifyUser(string UserName, string Pwd)
         {
-            string sql = string.Format("SELECT * FROM Sys_User where UserName={0}", UserName);
+            string sql = string.Format("SELECT * FROM Sys_User where UserName='{0}'", UserName);
             IList<User> IUser = SqlProcessing<User>.ExeQuerys(sql);
             if (IUser.Count > 0)
             {

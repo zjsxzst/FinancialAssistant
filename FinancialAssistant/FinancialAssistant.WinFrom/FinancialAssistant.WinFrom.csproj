@@ -46,16 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FM_Body.cs">
+    <Compile Include="FundCompany\FM_FCEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FM_Body.Designer.cs">
+    <Compile Include="FundCompany\FM_FCEdit.Designer.cs">
+      <DependentUpon>FM_FCEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FundName\FM_FNEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FundName\FM_FNEdit.Designer.cs">
+      <DependentUpon>FM_FNEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoldAPosition\FM_HoldAPositionEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoldAPosition\FM_HoldAPositionEdit.Designer.cs">
+      <DependentUpon>FM_HoldAPositionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home\FM_Body.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home\FM_Body.Designer.cs">
       <DependentUpon>FM_Body.cs</DependentUpon>
     </Compile>
-    <Compile Include="FM_Login.cs">
+    <Compile Include="Home\FM_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FM_Login.Designer.cs">
+    <Compile Include="Home\FM_Login.Designer.cs">
       <DependentUpon>FM_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
@@ -66,10 +84,25 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FM_Body.resx">
+    <Compile Include="List\FM_List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="List\FM_List.Designer.cs">
+      <DependentUpon>FM_List.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FundCompany\FM_FCEdit.resx">
+      <DependentUpon>FM_FCEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FundName\FM_FNEdit.resx">
+      <DependentUpon>FM_FNEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoldAPosition\FM_HoldAPositionEdit.resx">
+      <DependentUpon>FM_HoldAPositionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home\FM_Body.resx">
       <DependentUpon>FM_Body.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FM_Login.resx">
+    <EmbeddedResource Include="Home\FM_Login.resx">
       <DependentUpon>FM_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
@@ -84,6 +117,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="List\FM_List.resx">
+      <DependentUpon>FM_List.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -26,20 +26,25 @@ namespace FinancialAssistant.WinFrom
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UserServices.VerifyUser(MTB_UserName.Text.Trim(), MTB_PWD.Text.Trim());
-
+            if(UserServices.VerifyUser(MTB_UserName.Text.Trim(), MTB_PWD.Text.Trim()))
+            {
+                FM_Body FB = new FM_Body();
+                this.Hide();
+                FB.ShowDialog();
+                this.Close();
+                
+            }
+            else
+            {
+                MessageBox.Show("用户名或密码错误！", "提示",MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+
+
+        private void BT_ESC_Click(object sender, EventArgs e)
         {
-            SqlData SD = new SqlData();
-            SD.connStr = "Data Source=.;Initial Catalog=FinancialAssistant;User ID=sasa;Pwd={0}";
-            SD.honeybee = "123456";
-            string path = Environment.CurrentDirectory + "\\Config.xml";
-            string erro = "";
-            SD.connStr= Encryption.SuperEncrypt(SD.connStr, "zjsxzsta", "zjsxzstb");
-            SD.honeybee = Encryption.SuperEncrypt(SD.honeybee, "zjsxzsta", "zjsxzstb");
-            XmlOperate<SqlData>.Serialize(SD, path, ref erro);
+            this.Close();
         }
     }
 }

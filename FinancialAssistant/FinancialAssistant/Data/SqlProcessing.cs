@@ -71,36 +71,40 @@ namespace FinancialAssistant.Data
         /// <summary>
         /// 基础分页
         /// </summary>
-        /// <param name="num">单页显示数量</param>
         /// <param name="start">从第几条开始获取</param>
+        /// <param name="end">到第几条结束</param>
         /// <returns></returns>
-        public static IList<T> Paging(int? num = 50, int start = 0)
+        public static IList<T> Paging(int start = 0,int end=0)
         {
-            string sql = "select top 50 * from " + GetT() + " where > (select max(id) from(select top "
-                        + start.ToString() + " id from " + GetT() + " order by id)) order by id";
+
+            //string sql = "select top 50 * from " + GetT() + " where id > (select max(id) from(select top "
+            //            + start.ToString() + " id from " + GetT() + " order by id) a) order by id";
+            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + GetT()
+                + ")a where rownumber between "+ start+" and "+ end + " order by id";
             return ExeQuerys(sql);
 
         }
         /// <summary>
         /// 分页
         /// </summary>
-        /// <param name="num">单页显示数量,默认50</param>
         /// <param name="start">从第几条开始获取</param>
+        /// <param name="end">到第几条结束</param>
         /// <param name="IdName">ID名称(ID只限数字型),默认为ID</param>
         /// <param name="Where">筛选条件</param>
         /// <param name="OrderBy">根据那列排序,默认为ID</param>
         /// <returns></returns>
-        public static IList<T> Paging(int num, int start, string IdName, string Where, string OrderBy)
+        public static IList<T> Paging( int start,int end, string IdName, string Where, string OrderBy)
         {
             if (string.IsNullOrWhiteSpace(OrderBy))
                 OrderBy = "id";
             if (string.IsNullOrWhiteSpace(IdName))
                 IdName = "id";
-            if (num == 0)
-                num = 50;
             Where = HandleWhere(Where);
-            string sql = "select top 50 * from " + GetT() + " where " + IdName + "> (select max(id) from(select top "
-                        + start.ToString() + " " + IdName + " from " + GetT() + " order by " + IdName + "))";
+            string sql = "select * from (select row_number()over(order by "+ IdName+")rownumber, *from " + GetT()
+                + ")a where rownumber between " + start + " and " +end+" order by " + IdName + "))";
+            //return ExeQuerys(sql);
+            //string sql = "select top 50 * from " + GetT() + " where " + IdName + "> (select max(id) from(select top "
+            //            + start.ToString() + " " + IdName + " from " + GetT() + " order by " + IdName + "))";
             if (string.IsNullOrWhiteSpace(Where))
                 sql += "order by " + OrderBy;
             else
@@ -110,17 +114,17 @@ namespace FinancialAssistant.Data
         /// <summary>
         /// 分页
         /// </summary>
-        /// <param name="num">单页显示数量,默认50</param>
         /// <param name="start">从第几条开始获取</param>
+        ///  /// <param name="end">到第几条结束</param>
         /// <param name="Where">筛选条件</param>
         /// <returns></returns>
-        public static IList<T> Paging(int num, int start, string Where)
+        public static IList<T> Paging(int start,int end, string Where)
         {
-            if (num == 0)
-                num = 50;
             Where = HandleWhere(Where);
-            string sql = "select top 50 * from " + GetT() + " where id> (select max(id) from(select top "
-                        + start.ToString() + " id from " + GetT() + " order by id)) ";
+            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + GetT()
+                + ")a where rownumber between " + start + " and " + end;
+            //string sql = "select top 50 * from " + GetT() + " where id> (select max(id) from(select top "
+            //            + start.ToString() + " id from " + GetT() + " order by id)) ";
             if (string.IsNullOrWhiteSpace(Where))
                 sql += Where + "order by id";
             return ExeQuerys(sql);
@@ -163,8 +167,8 @@ namespace FinancialAssistant.Data
             SqlData sd = new SqlData();
             string data = "";
             XmlOperate<SqlData>.DSerialize(ref sd, "Config.xml", ref data);
-            PassWD = Encryption.SuperDesDecrypt(sd.honeybee, "abcdefgh", "abcdefgh");
-            connStr = String.Format(Encryption.SuperDesDecrypt(sd.connStr, "abcdefgh", "abcdefgh"), PassWD);
+            PassWD = Encryption.SuperDesDecrypt(sd.honeybee, "zjsxzsta", "zjsxzstb");
+            connStr = String.Format(Encryption.SuperDesDecrypt(sd.connStr, "zjsxzsta", "zjsxzstb"), PassWD);
             con = new SqlConnection(connStr);
             //SqlProcessing<SqlData>.Init(sd.connStr, sd.honeybee);
         }
@@ -180,7 +184,7 @@ namespace FinancialAssistant.Data
             con.Close();
             return dt;
         }
-        public bool ExeNoQuery(String sql)//添加、修改、删除
+        public static bool ExeNoQuery(String sql)//添加、修改、删除
         {
             Init();
             if (con.State == ConnectionState.Closed)
@@ -234,8 +238,8 @@ namespace FinancialAssistant.Data
         /// <returns></returns>
         public static DataTable DTPaging(string Table, int? num = 50, int start = 0)
         {
-            string sql = "select top 50 * from " + Table + " where > (select max(id) from(select top "
-                      + start.ToString() + " id from " + Table + " order by id)) order by id";
+            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + Table
+                            + ")a where rownumber between " + start + " and " + (start + num) + " order by id";
             return ExeQuery(sql);
         }
         /// <summary>
@@ -256,8 +260,8 @@ namespace FinancialAssistant.Data
             if (num == 0)
                 num = 50;
             Where = HandleWhere(Where);
-            string sql = "select top 50 * from " + Table + " where " + IdName + "> (select max(id) from(select top "
-                        + start.ToString() + " " + IdName + " from " + Table + " order by " + IdName + "))";
+            string sql = "select * from (select row_number()over(order by " + IdName + ")rownumber, *from " + Table
+                           + ")a where rownumber between " + start + " and " + (start + num) + " order by " + IdName;
             if (string.IsNullOrWhiteSpace(Where))
                 sql += "order by " + OrderBy;
             else
@@ -276,8 +280,9 @@ namespace FinancialAssistant.Data
             if (num == 0)
                 num = 50;
             Where = HandleWhere(Where);
-            string sql = "select top 50 * from " + Table + " where id> (select max(id) from(select top "
-                        + start.ToString() + " id from " + Table + " order by id)) ";
+
+            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + Table
+                             + ")a where rownumber between " + start + " and " + (start + num);
             if (string.IsNullOrWhiteSpace(Where))
                 sql += Where + "order by id";
             return ExeQuery(sql);

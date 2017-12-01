@@ -40,9 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fund\CompanyServices.cs" />
+    <Compile Include="Fund\FundNameServices.cs" />
+    <Compile Include="Fund\Fund_HoldAPositionServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sys\UserServices.cs" />
     <Compile Include="Universal\UniversalServices.cs" />
+    <Compile Include="V\V_HoldAPositionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FinancialAssistant.DoMain\FinancialAssistant.DoMain.csproj">
