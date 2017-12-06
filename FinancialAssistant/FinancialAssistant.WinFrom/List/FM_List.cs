@@ -59,6 +59,7 @@ namespace FinancialAssistant.WinFrom.List
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            
             int Count = V_HoldAPositionService.GetCount();
             List<int> data = new List<int>();
             int num = Count / int.Parse(comboBox1.Text) + 1, endnum = 1;
@@ -177,8 +178,7 @@ namespace FinancialAssistant.WinFrom.List
             int page = int.Parse(comboBox2.Text);
             int num = Count / int.Parse(comboBox1.Text) + 1, startnum = int.Parse(comboBox2.Text), endnum = int.Parse(comboBox2.Text);
             if (page<= num && page>0)
-            {
-               
+            {  
                 if (startnum - 5 <= 0)
                     startnum = 1;
                 else
@@ -231,6 +231,11 @@ namespace FinancialAssistant.WinFrom.List
             comboBox2.DataSource = new BindingList<int>(data);
             comboBox2.Text = "1";
             dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(1, int.Parse(comboBox1.Text)));
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

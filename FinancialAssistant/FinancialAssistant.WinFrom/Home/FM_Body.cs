@@ -1,4 +1,5 @@
-﻿using FinancialAssistant.WinFrom.List;
+﻿using FinancialAssistant.WinFrom.FundCompany;
+using FinancialAssistant.WinFrom.List;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,12 @@ namespace FinancialAssistant.WinFrom
         private void FM_Body_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void 持仓ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FM_FCList FC = new FM_FCList();
+            FC.Show();
         }
     }
 }

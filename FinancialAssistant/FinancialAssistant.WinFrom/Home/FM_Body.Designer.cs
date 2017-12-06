@@ -282,13 +282,14 @@
             // 持仓ToolStripMenuItem
             // 
             this.持仓ToolStripMenuItem.Name = "持仓ToolStripMenuItem";
-            this.持仓ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.持仓ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.持仓ToolStripMenuItem.Text = "持仓";
+            this.持仓ToolStripMenuItem.Click += new System.EventHandler(this.持仓ToolStripMenuItem_Click);
             // 
             // 列表ToolStripMenuItem
             // 
             this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.列表ToolStripMenuItem.Text = "列表";
             this.列表ToolStripMenuItem.Click += new System.EventHandler(this.列表ToolStripMenuItem_Click);
             // 

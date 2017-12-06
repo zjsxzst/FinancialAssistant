@@ -46,11 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APP\PagingHelp.cs" />
     <Compile Include="FundCompany\FM_FCEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FundCompany\FM_FCEdit.Designer.cs">
       <DependentUpon>FM_FCEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FundCompany\FM_FCList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FundCompany\FM_FCList.Designer.cs">
+      <DependentUpon>FM_FCList.cs</DependentUpon>
     </Compile>
     <Compile Include="FundName\FM_FNEdit.cs">
       <SubType>Form</SubType>
@@ -92,6 +99,9 @@
     </Compile>
     <EmbeddedResource Include="FundCompany\FM_FCEdit.resx">
       <DependentUpon>FM_FCEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FundCompany\FM_FCList.resx">
+      <DependentUpon>FM_FCList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FundName\FM_FNEdit.resx">
       <DependentUpon>FM_FNEdit.cs</DependentUpon>

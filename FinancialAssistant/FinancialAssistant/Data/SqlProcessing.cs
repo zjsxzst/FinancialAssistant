@@ -121,12 +121,14 @@ namespace FinancialAssistant.Data
         public static IList<T> Paging(int start,int end, string Where)
         {
             Where = HandleWhere(Where);
-            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + GetT()
+            string sql = "select * from (select row_number()over(order by id)rownumber, * from " + GetT()
                 + ")a where rownumber between " + start + " and " + end;
             //string sql = "select top 50 * from " + GetT() + " where id> (select max(id) from(select top "
             //            + start.ToString() + " id from " + GetT() + " order by id)) ";
-            if (string.IsNullOrWhiteSpace(Where))
+            if (!string.IsNullOrWhiteSpace(Where))
                 sql += Where + "order by id";
+            else
+                sql += "order by id";
             return ExeQuerys(sql);
         }
         /// <summary>
@@ -138,17 +140,23 @@ namespace FinancialAssistant.Data
         {
             try
             {
-                if (Where.Substring(0, 3).ToLower() != "and")
-                    Where = "and" + Where;
-                else if (Where.ToLower() == "and")
-                    Where = "";
+               if(Where.Length>3)
+                {
+                    if (Where.Substring(0, 3).ToLower() != "and")
+                        Where = " and" + Where.Substring(3, Where.Length-1);
+                    return Where;
+                }
+                return " "+Where;
             }
             catch (Exception ex)
             {
-                if (Where.ToLower() == "and")
-                    Where = "";
-                else if (Where.ToLower() != "and")
-                    Where = "and" + Where;
+                if(!string.IsNullOrWhiteSpace(Where))
+                {
+                    if (Where.ToLower() == "and")
+                        Where = "";
+                    else if (Where.ToLower() != "and")
+                        Where = " and " + Where;
+                }
             }
             return Where;
         }

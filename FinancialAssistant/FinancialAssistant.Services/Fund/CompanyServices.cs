@@ -25,5 +25,14 @@ namespace FinancialAssistant.Services.Fund
             string sql = string.Format("select * from Fund_Company");
             return SqlProcessing<Fund_Company>.ExeQuerys(sql);
         }
+        public IList<Fund_Company> GetData(int start, int end,string Where )
+        {
+            return SqlProcessing<Fund_Company>.Paging(start, end, Where);
+        }
+        public int GetCount()
+        {
+            string Sql = "SELECT COUNT(*) FROM Fund_Company";
+            return int.Parse(SqlProcessing.ExeQuery(Sql).Rows[0][0].ToString());
+        }
     }
 }
