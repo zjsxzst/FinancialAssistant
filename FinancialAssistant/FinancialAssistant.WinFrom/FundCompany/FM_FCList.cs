@@ -1,4 +1,5 @@
-﻿using FinancialAssistant.DoMain.Fund;
+﻿using FinancialAssistant.Data;
+using FinancialAssistant.DoMain.Fund;
 using FinancialAssistant.Services.Fund;
 using System;
 using System.Collections.Generic;
@@ -142,6 +143,13 @@ namespace FinancialAssistant.WinFrom.FundCompany
         private void BT_NextPage_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int a = 0; 
+            string sql = "select * from Fund_Company";
+            SqlProcessing.DTPaging(sql, 2, 1, ref a);
         }
     }
 }

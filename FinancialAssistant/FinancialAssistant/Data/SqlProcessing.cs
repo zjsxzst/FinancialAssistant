@@ -253,6 +253,27 @@ namespace FinancialAssistant.Data
         /// <summary>
         /// 分页
         /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="pageSize">单页大小</param>
+        /// <param name="pageIndex">当前页数</param>
+        /// <param name="pageNum">总条数</param>
+        /// <returns></returns>
+        public static DataTable DTPaging(string sql, int pageSize, int pageIndex,ref int pageNum)
+        {
+            DataTable dt = new DataTable();
+            Init();
+            //if (con.State == ConnectionState.Closed)
+            //    con.Open();
+            SqlDataAdapter oda = new SqlDataAdapter(sql, con);
+            DataSet ds = new DataSet();
+            pageNum=
+            oda.Fill(ds, pageSize * (pageIndex - 1), pageSize, "Page");
+            dt = ds.Tables["Page"];
+            return dt;
+        }
+        /// <summary>
+        /// 分页
+        /// </summary>
         /// <param name="num">单页显示数量,默认50</param>
         /// <param name="start">从第几条开始获取</param>
         /// <param name="IdName">ID名称(ID只限数字型),默认为ID</param>
