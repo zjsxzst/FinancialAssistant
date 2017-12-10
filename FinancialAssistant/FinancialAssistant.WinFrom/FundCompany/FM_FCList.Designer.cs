@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.markTextBox2 = new FinancialAssistant.Widget.Text.MarkTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.markTextBox1 = new FinancialAssistant.Widget.Text.MarkTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,13 +46,23 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.添加ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.LISTStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.markTextBox2 = new FinancialAssistant.Widget.Text.MarkTextBox();
+            this.markTextBox1 = new FinancialAssistant.Widget.Text.MarkTextBox();
+            this.BT_TextClone = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.LISTStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.BT_TextClone);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.markTextBox2);
             this.groupBox1.Controls.Add(this.label2);
@@ -68,21 +77,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(443, 27);
+            this.button1.Location = new System.Drawing.Point(380, 27);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "搜索";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // markTextBox2
-            // 
-            this.markTextBox2.Location = new System.Drawing.Point(74, 29);
-            this.markTextBox2.Name = "markTextBox2";
-            this.markTextBox2.Size = new System.Drawing.Size(100, 21);
-            this.markTextBox2.TabIndex = 3;
-            this.markTextBox2.WaterText = "请输入ID";
             // 
             // label2
             // 
@@ -92,14 +93,6 @@
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "ID：";
-            // 
-            // markTextBox1
-            // 
-            this.markTextBox1.Location = new System.Drawing.Point(258, 29);
-            this.markTextBox1.Name = "markTextBox1";
-            this.markTextBox1.Size = new System.Drawing.Size(100, 21);
-            this.markTextBox1.TabIndex = 1;
-            this.markTextBox1.WaterText = "请输入公司名";
             // 
             // label1
             // 
@@ -125,6 +118,8 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(611, 297);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
+            this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             // 
             // ID
             // 
@@ -152,6 +147,7 @@
             this.COM_Page.Name = "COM_Page";
             this.COM_Page.Size = new System.Drawing.Size(85, 20);
             this.COM_Page.TabIndex = 3;
+            this.COM_Page.TextChanged += new System.EventHandler(this.COM_Page_TextChanged);
             // 
             // BT_UpPage
             // 
@@ -199,6 +195,7 @@
             this.BT_TrailerPage.TabIndex = 8;
             this.BT_TrailerPage.Text = "尾页";
             this.BT_TrailerPage.UseVisualStyleBackColor = true;
+            this.BT_TrailerPage.Click += new System.EventHandler(this.BT_TrailerPage_Click);
             // 
             // BT_HomePage
             // 
@@ -214,7 +211,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.添加ToolStripMenuItem,
-            this.修改ToolStripMenuItem});
+            this.修改ToolStripMenuItem,
+            this.删除ToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(609, 25);
@@ -233,6 +231,70 @@
             this.修改ToolStripMenuItem.Name = "修改ToolStripMenuItem";
             this.修改ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.修改ToolStripMenuItem.Text = "修改";
+            this.修改ToolStripMenuItem.Click += new System.EventHandler(this.修改ToolStripMenuItem_Click);
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(44, 21);
+            this.删除ToolStripMenuItem1.Text = "删除";
+            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
+            // 
+            // LISTStrip
+            // 
+            this.LISTStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加ToolStripMenuItem1,
+            this.修改ToolStripMenuItem1,
+            this.删除ToolStripMenuItem});
+            this.LISTStrip.Name = "LISTStrip";
+            this.LISTStrip.Size = new System.Drawing.Size(101, 70);
+            // 
+            // 添加ToolStripMenuItem1
+            // 
+            this.添加ToolStripMenuItem1.Name = "添加ToolStripMenuItem1";
+            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.添加ToolStripMenuItem1.Text = "添加";
+            this.添加ToolStripMenuItem1.Click += new System.EventHandler(this.添加ToolStripMenuItem1_Click);
+            // 
+            // 修改ToolStripMenuItem1
+            // 
+            this.修改ToolStripMenuItem1.Name = "修改ToolStripMenuItem1";
+            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.修改ToolStripMenuItem1.Text = "修改";
+            this.修改ToolStripMenuItem1.Click += new System.EventHandler(this.修改ToolStripMenuItem1_Click);
+            // 
+            // 删除ToolStripMenuItem
+            // 
+            this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // markTextBox2
+            // 
+            this.markTextBox2.Location = new System.Drawing.Point(74, 29);
+            this.markTextBox2.Name = "markTextBox2";
+            this.markTextBox2.Size = new System.Drawing.Size(100, 21);
+            this.markTextBox2.TabIndex = 3;
+            this.markTextBox2.WaterText = "请输入ID";
+            // 
+            // markTextBox1
+            // 
+            this.markTextBox1.Location = new System.Drawing.Point(258, 29);
+            this.markTextBox1.Name = "markTextBox1";
+            this.markTextBox1.Size = new System.Drawing.Size(100, 21);
+            this.markTextBox1.TabIndex = 1;
+            this.markTextBox1.WaterText = "请输入公司名";
+            // 
+            // BT_TextClone
+            // 
+            this.BT_TextClone.Location = new System.Drawing.Point(490, 29);
+            this.BT_TextClone.Name = "BT_TextClone";
+            this.BT_TextClone.Size = new System.Drawing.Size(75, 23);
+            this.BT_TextClone.TabIndex = 5;
+            this.BT_TextClone.Text = "清空";
+            this.BT_TextClone.UseVisualStyleBackColor = true;
+            this.BT_TextClone.Click += new System.EventHandler(this.BT_TextClone_Click);
             // 
             // FM_FCList
             // 
@@ -258,6 +320,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.LISTStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,5 +346,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 添加ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip LISTStrip;
+        private System.Windows.Forms.ToolStripMenuItem 添加ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
+        private System.Windows.Forms.Button BT_TextClone;
     }
 }

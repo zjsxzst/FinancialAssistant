@@ -50,6 +50,7 @@
     <Compile Include="Fund\Fund_HoldAPosition.cs" />
     <Compile Include="Fund\Fund_HoldAPositionBat.cs" />
     <Compile Include="Fund\Fund_Name.cs" />
+    <Compile Include="Fund\test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sys\User.cs" />
     <Compile Include="Virtual\InitialName.cs" />

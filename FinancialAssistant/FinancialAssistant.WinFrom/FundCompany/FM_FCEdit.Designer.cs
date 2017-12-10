@@ -82,6 +82,7 @@
             this.Controls.Add(this.markTextBox1);
             this.Name = "FM_FCEdit";
             this.Text = "FM_FCEdit";
+            this.Load += new System.EventHandler(this.FM_FCEdit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

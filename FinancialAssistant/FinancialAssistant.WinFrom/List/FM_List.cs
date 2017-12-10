@@ -1,4 +1,5 @@
-﻿using FinancialAssistant.DoMain.V;
+﻿using FinancialAssistant.Data;
+using FinancialAssistant.DoMain.V;
 using FinancialAssistant.Services.V;
 using FinancialAssistant.WinFrom.FundCompany;
 using FinancialAssistant.WinFrom.FundName;
@@ -21,6 +22,7 @@ namespace FinancialAssistant.WinFrom.List
         public FM_List()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -38,19 +40,19 @@ namespace FinancialAssistant.WinFrom.List
 
         private void FM_List_Load(object sender, EventArgs e)
         {
-            comboBox1.Text = "10";
-            dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(0, 10));
-            int Count = V_HoldAPositionService.GetCount();
-            List<int> data = new List<int>();
-            int num = Count / int.Parse(comboBox1.Text) + 1, endnum = 1;
-            if (endnum + 5 > num)
-                endnum = num;
-            else
-                endnum += 5;
-            for (int i = 1; i <= endnum; i++)
-                data.Add(i);
-            comboBox2.DataSource = new BindingList<int>(data);
-            comboBox2.Text = "1";
+            //comboBox1.Text = "10";
+            //dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(100, 1,"",""));
+            //int Count = V_HoldAPositionService.GetCount();
+            //List<int> data = new List<int>();
+            //int num = Count / int.Parse(comboBox1.Text) + 1, endnum = 1;
+            //if (endnum + 5 > num)
+            //    endnum = num;
+            //else
+            //    endnum += 5;
+            //for (int i = 1; i <= endnum; i++)
+            //    data.Add(i);
+            //comboBox2.DataSource = new BindingList<int>(data);
+            //comboBox2.Text = "1";
         }
         /// <summary>
         /// 首页
@@ -58,8 +60,7 @@ namespace FinancialAssistant.WinFrom.List
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
-        {
-            
+        {            
             int Count = V_HoldAPositionService.GetCount();
             List<int> data = new List<int>();
             int num = Count / int.Parse(comboBox1.Text) + 1, endnum = 1;
@@ -71,7 +72,7 @@ namespace FinancialAssistant.WinFrom.List
                 data.Add(i);
             comboBox2.DataSource = new BindingList<int>(data);
             comboBox2.Text = "1";
-            dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(1,int.Parse(comboBox1.Text)));
+            //dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(1,int.Parse(comboBox1.Text)));
         }
         /// <summary>
         /// 上一页
@@ -97,13 +98,13 @@ namespace FinancialAssistant.WinFrom.List
                 data.Add(i);
             int start = int.Parse(comboBox1.Text) * (int.Parse(comboBox2.Text) - 2)+1;
             int end = int.Parse(comboBox1.Text) * (int.Parse(comboBox2.Text)-1);
-            IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
-            if (IVP.Count != 0)
-            {
-                dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
-                comboBox2.DataSource = new BindingList<int>(data);
-                comboBox2.Text = (page - 1).ToString();
-            }
+            //IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
+            //if (IVP.Count != 0)
+            //{
+            //    dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
+            //    comboBox2.DataSource = new BindingList<int>(data);
+            //    comboBox2.Text = (page - 1).ToString();
+            //}
 
         }
         /// <summary>
@@ -130,13 +131,13 @@ namespace FinancialAssistant.WinFrom.List
                 data.Add(i);
             int start = int.Parse(comboBox1.Text) * (int.Parse(comboBox2.Text))+1;
             int end = int.Parse(comboBox1.Text) * (int.Parse(comboBox2.Text)+1);
-            IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
-            if (IVP.Count != 0)
-            {
-                dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
-                comboBox2.DataSource = new BindingList<int>(data);
-                comboBox2.Text = (page + 1).ToString();
-            }
+            //IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
+            //if (IVP.Count != 0)
+            //{
+            //    dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
+            //    comboBox2.DataSource = new BindingList<int>(data);
+            //    comboBox2.Text = (page + 1).ToString();
+            //}
 
         }
 
@@ -159,11 +160,11 @@ namespace FinancialAssistant.WinFrom.List
                 data.Add(i);
             int start = (num-1) * (int.Parse(comboBox1.Text)) + 1;
             int end = Count;
-            IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
-            if (IVP.Count != 0)
-                dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
-            comboBox2.DataSource = new BindingList<int>(data);
-            comboBox2.Text = (num).ToString();
+            //IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
+            //if (IVP.Count != 0)
+            //    dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
+            //comboBox2.DataSource = new BindingList<int>(data);
+            //comboBox2.Text = (num).ToString();
 
         }
         /// <summary>
@@ -191,13 +192,13 @@ namespace FinancialAssistant.WinFrom.List
                     data.Add(i);
                 int start = int.Parse(comboBox1.Text) * (int.Parse(comboBox2.Text) - 1) + 1;
                 int end = int.Parse(comboBox1.Text) * (int.Parse(comboBox2.Text));
-                IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
-                if (IVP.Count != 0)
-                {
-                    dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
-                    comboBox2.DataSource = new BindingList<int>(data);
-                    comboBox2.Text = (page).ToString();
-                }
+                //IList<V_HoldAPosition> IVP = V_HoldAPositionService.GetData(start, end);
+                //if (IVP.Count != 0)
+                //{
+                //    dataGridView1.DataSource = new BindingList<V_HoldAPosition>(IVP);
+                //    comboBox2.DataSource = new BindingList<int>(data);
+                //    comboBox2.Text = (page).ToString();
+                //}
             }
             else
             {
@@ -230,12 +231,22 @@ namespace FinancialAssistant.WinFrom.List
                 data.Add(i);
             comboBox2.DataSource = new BindingList<int>(data);
             comboBox2.Text = "1";
-            dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(1, int.Parse(comboBox1.Text)));
+            //dataGridView1.DataSource = new BindingList<V_HoldAPosition>(V_HoldAPositionService.GetData(1, int.Parse(comboBox1.Text)));
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+          
         }
     }
 }

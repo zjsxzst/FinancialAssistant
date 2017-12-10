@@ -46,6 +46,17 @@ namespace FinancialAssistant.Data
             con = new SqlConnection(connStr);
             //SqlProcessing<SqlData>.Init(sd.connStr, sd.honeybee);
         }
+        private static DataTable ExeQuery(String sql)//查询
+        {
+            Init();
+            //if (con.State == ConnectionState.Closed)
+            //    con.Open();
+            SqlDataAdapter oda = new SqlDataAdapter(sql, con);
+            dt = new DataTable();
+            oda.Fill(dt);
+            con.Close();
+            return dt;
+        }
         public static IList<T> ExeQuerys(string sql)
         {
             Init();
@@ -71,97 +82,53 @@ namespace FinancialAssistant.Data
         /// <summary>
         /// 基础分页
         /// </summary>
-        /// <param name="start">从第几条开始获取</param>
-        /// <param name="end">到第几条结束</param>
+        /// <param name="sql"></param>
+        /// <param name="pageSize">单页大小</param>
+        /// <param name="pageIndex">当前页数</param>
+        /// <param name="pageNum">当前页条数</param>
         /// <returns></returns>
-        public static IList<T> Paging(int start = 0,int end=0)
+        public static IList<T> PagingBase(string sql, int pageSize, int pageIndex, ref int pageNum)
         {
-
-            //string sql = "select top 50 * from " + GetT() + " where id > (select max(id) from(select top "
-            //            + start.ToString() + " id from " + GetT() + " order by id) a) order by id";
-            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + GetT()
-                + ")a where rownumber between "+ start+" and "+ end + " order by id";
-            return ExeQuerys(sql);
-
+            DataTable dt = new DataTable();
+            Init();
+            if (con.State == ConnectionState.Closed)
+                con.Open();
+            SqlDataAdapter oda = new SqlDataAdapter(sql, con);
+            DataSet ds = new DataSet();
+            pageNum = oda.Fill(ds, pageSize * (pageIndex - 1), pageSize, "Page");
+            dt = ds.Tables["Page"];
+            if (dt.Rows.Count > 0)
+                return Transform<T>.DataTableToList(dt);
+            return new List<T>();
+        }
+        /// <summary>
+        /// 获取总数
+        /// </summary>
+        /// <param name="Table"></param>
+        /// <param name="Where"></param>
+        /// <param name="OrderBy"></param>
+        /// <returns></returns>
+        /// 
+        public static int TotalPage(string sql)
+        {
+            sql = sql.Replace("*", "Count(*) as counts");
+            DataTable DT = ExeQuery(sql);
+            return int.Parse(DT.Rows[0]["counts"].ToString());
         }
         /// <summary>
         /// 分页
         /// </summary>
-        /// <param name="start">从第几条开始获取</param>
-        /// <param name="end">到第几条结束</param>
-        /// <param name="IdName">ID名称(ID只限数字型),默认为ID</param>
-        /// <param name="Where">筛选条件</param>
-        /// <param name="OrderBy">根据那列排序,默认为ID</param>
+        /// <param name="Sql"></param>
+        /// <param name="pageSize">单页大小</param>
+        /// <param name="pageIndex">当前页数</param>
+        /// <param name="pageNum">当前页条数</param>
+        /// <param name="TotalPages">总条数</param>
         /// <returns></returns>
-        public static IList<T> Paging( int start,int end, string IdName, string Where, string OrderBy)
+        public static IList<T> Paging(string Sql, int pageSize, int pageIndex, ref int pageNum, ref int TotalPages)
         {
-            if (string.IsNullOrWhiteSpace(OrderBy))
-                OrderBy = "id";
-            if (string.IsNullOrWhiteSpace(IdName))
-                IdName = "id";
-            Where = HandleWhere(Where);
-            string sql = "select * from (select row_number()over(order by "+ IdName+")rownumber, *from " + GetT()
-                + ")a where rownumber between " + start + " and " +end+" order by " + IdName + "))";
-            //return ExeQuerys(sql);
-            //string sql = "select top 50 * from " + GetT() + " where " + IdName + "> (select max(id) from(select top "
-            //            + start.ToString() + " " + IdName + " from " + GetT() + " order by " + IdName + "))";
-            if (string.IsNullOrWhiteSpace(Where))
-                sql += "order by " + OrderBy;
-            else
-                sql += Where + " order by " + OrderBy;
-            return ExeQuerys(sql);
+            TotalPages = TotalPage(Sql) / pageSize;
+            return PagingBase(Sql, pageSize, pageIndex, ref pageNum);
         }
-        /// <summary>
-        /// 分页
-        /// </summary>
-        /// <param name="start">从第几条开始获取</param>
-        ///  /// <param name="end">到第几条结束</param>
-        /// <param name="Where">筛选条件</param>
-        /// <returns></returns>
-        public static IList<T> Paging(int start,int end, string Where)
-        {
-            Where = HandleWhere(Where);
-            string sql = "select * from (select row_number()over(order by id)rownumber, * from " + GetT()
-                + ")a where rownumber between " + start + " and " + end;
-            //string sql = "select top 50 * from " + GetT() + " where id> (select max(id) from(select top "
-            //            + start.ToString() + " id from " + GetT() + " order by id)) ";
-            if (!string.IsNullOrWhiteSpace(Where))
-                sql += Where + "order by id";
-            else
-                sql += "order by id";
-            return ExeQuerys(sql);
-        }
-        /// <summary>
-        /// where条件处理
-        /// </summary>
-        /// <param name="Where">where条件</param>
-        /// <returns></returns>
-        private static string HandleWhere(string Where)
-        {
-            try
-            {
-               if(Where.Length>3)
-                {
-                    if (Where.Substring(0, 3).ToLower() != "and")
-                        Where = " and" + Where.Substring(3, Where.Length-1);
-                    return Where;
-                }
-                return " "+Where;
-            }
-            catch (Exception ex)
-            {
-                if(!string.IsNullOrWhiteSpace(Where))
-                {
-                    if (Where.ToLower() == "and")
-                        Where = "";
-                    else if (Where.ToLower() != "and")
-                        Where = " and " + Where;
-                }
-            }
-            return Where;
-        }
-
-
     }
     public class SqlProcessing
     {
@@ -241,103 +208,50 @@ namespace FinancialAssistant.Data
         /// <summary>
         /// 基础分页
         /// </summary>
-        /// <param name="num">单页显示数量</param>
-        /// <param name="start">从第几条开始获取</param>
-        /// <returns></returns>
-        public static DataTable DTPaging(string Table, int? num = 50, int start = 0)
-        {
-            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + Table
-                            + ")a where rownumber between " + start + " and " + (start + num) + " order by id";
-            return ExeQuery(sql);
-        }
-        /// <summary>
-        /// 分页
-        /// </summary>
         /// <param name="sql"></param>
         /// <param name="pageSize">单页大小</param>
         /// <param name="pageIndex">当前页数</param>
-        /// <param name="pageNum">总条数</param>
+        /// <param name="pageNum">当前页条数</param>
         /// <returns></returns>
-        public static DataTable DTPaging(string sql, int pageSize, int pageIndex,ref int pageNum)
+        public static DataTable PagingBase(string sql, int pageSize, int pageIndex,ref int pageNum)
         {
             DataTable dt = new DataTable();
             Init();
-            //if (con.State == ConnectionState.Closed)
-            //    con.Open();
+            if (con.State == ConnectionState.Closed)
+                con.Open();
             SqlDataAdapter oda = new SqlDataAdapter(sql, con);
             DataSet ds = new DataSet();
-            pageNum=
-            oda.Fill(ds, pageSize * (pageIndex - 1), pageSize, "Page");
+            pageNum=oda.Fill(ds, pageSize * (pageIndex - 1), pageSize, "Page");
             dt = ds.Tables["Page"];
             return dt;
         }
         /// <summary>
-        /// 分页
+        /// 获取总数
         /// </summary>
-        /// <param name="num">单页显示数量,默认50</param>
-        /// <param name="start">从第几条开始获取</param>
-        /// <param name="IdName">ID名称(ID只限数字型),默认为ID</param>
-        /// <param name="Where">筛选条件</param>
-        /// <param name="OrderBy">根据那列排序,默认为ID</param>
+        /// <param name="Table"></param>
+        /// <param name="Where"></param>
+        /// <param name="OrderBy"></param>
         /// <returns></returns>
-        public static DataTable DTPaging(string Table, int num, int start, string IdName, string Where, string OrderBy)
+        public static int TotalPage(string Sql)
         {
-            if (string.IsNullOrWhiteSpace(OrderBy))
-                OrderBy = "id";
-            if (string.IsNullOrWhiteSpace(IdName))
-                IdName = "id";
-            if (num == 0)
-                num = 50;
-            Where = HandleWhere(Where);
-            string sql = "select * from (select row_number()over(order by " + IdName + ")rownumber, *from " + Table
-                           + ")a where rownumber between " + start + " and " + (start + num) + " order by " + IdName;
-            if (string.IsNullOrWhiteSpace(Where))
-                sql += "order by " + OrderBy;
-            else
-                sql += Where + " order by " + OrderBy;
-            return ExeQuery(sql);
+            Sql = Sql.Replace("*", "Count(*) as counts");
+            DataTable DT= ExeQuery(Sql);
+            return int.Parse(DT.Rows[0]["counts"].ToString());
         }
         /// <summary>
         /// 分页
         /// </summary>
-        /// <param name="num">单页显示数量,默认50</param>
-        /// <param name="start">从第几条开始获取</param>
-        /// <param name="Where">筛选条件</param>
+        /// <param name="Sql"></param>
+        /// <param name="pageSize">单页大小</param>
+        /// <param name="pageIndex">当前页数</param>
+        /// <param name="pageNum">当前页条数</param>
+        /// <param name="TotalPages">总条数</param>
         /// <returns></returns>
-        public static DataTable DTPaging(string Table, int num, int start, string Where)
-        {
-            if (num == 0)
-                num = 50;
-            Where = HandleWhere(Where);
+        public static DataTable DTPaging(string Sql, int pageSize, int pageIndex, ref int pageNum,ref int TotalPages)
+        {        
+            TotalPages = TotalPage(Sql) / pageSize;
+            return PagingBase(Sql, pageSize, pageIndex, ref pageNum);
+        }
 
-            string sql = "select * from (select row_number()over(order by id)rownumber, *from " + Table
-                             + ")a where rownumber between " + start + " and " + (start + num);
-            if (string.IsNullOrWhiteSpace(Where))
-                sql += Where + "order by id";
-            return ExeQuery(sql);
-        }
-        /// <summary>
-        /// where条件处理
-        /// </summary>
-        /// <param name="Where">where条件</param>
-        /// <returns></returns>
-        private static string HandleWhere(string Where)
-        {
-            try
-            {
-                if (Where.Substring(0, 3).ToLower() != "and")
-                    Where = "and" + Where;
-                else if (Where.ToLower() == "and")
-                    Where = "";
-            }
-            catch (Exception ex)
-            {
-                if (Where.ToLower() == "and")
-                    Where = "";
-                else if (Where.ToLower() != "and")
-                    Where = "and" + Where;
-            }
-            return Where;
-        }
     }
 }

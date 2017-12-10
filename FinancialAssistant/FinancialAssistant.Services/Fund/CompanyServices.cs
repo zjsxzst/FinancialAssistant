@@ -10,9 +10,14 @@ namespace FinancialAssistant.Services.Fund
 {
     public class CompanyServices
     {
+        public bool Delete(int Id)
+        {
+            string sql = string.Format("DELETE FROM Fund_Company Where Id={0}",Id);
+            return SqlProcessing.ExeNoQuery(sql);
+        }
         public bool Update(Fund_Company FC)
         {
-            string sql = string.Format("UPDATE [Fund_Company SET [CompanyName] = '{0}' WHERE ID={1} ", FC.CompanyName,FC.Id);
+            string sql = string.Format("UPDATE Fund_Company SET [CompanyName] = '{0}' WHERE ID={1} ", FC.CompanyName,FC.Id);
             return SqlProcessing.ExeNoQuery(sql);
         }
         public bool Insert(Fund_Company FC)
@@ -25,9 +30,15 @@ namespace FinancialAssistant.Services.Fund
             string sql = string.Format("select * from Fund_Company");
             return SqlProcessing<Fund_Company>.ExeQuerys(sql);
         }
-        public IList<Fund_Company> GetData(int start, int end,string Where )
+        public IList<Fund_Company> GetData(int pageSize, int pageIndex, ref int pageNum,
+                                            ref int TotalPages,string Where,string OrderBy)
         {
-            return SqlProcessing<Fund_Company>.Paging(start, end, Where);
+            string sql = "select * from Fund_Company";
+            if (!string.IsNullOrWhiteSpace(Where))
+                sql = sql + " " + Where;
+            if (!string.IsNullOrWhiteSpace(OrderBy))
+                sql = sql + " " + OrderBy;
+            return SqlProcessing<Fund_Company>.Paging(sql, pageSize, pageIndex,ref pageNum,ref TotalPages);
         }
         public int GetCount()
         {
