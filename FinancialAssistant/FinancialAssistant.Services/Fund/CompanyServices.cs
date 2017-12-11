@@ -30,6 +30,11 @@ namespace FinancialAssistant.Services.Fund
             string sql = string.Format("select * from Fund_Company");
             return SqlProcessing<Fund_Company>.ExeQuerys(sql);
         }
+        public IList<Fund_Company> GetData(string OrderBy,string Where)
+        {
+            string sql = string.Format("select * from Fund_Company {0} {1}",Where,OrderBy);
+            return SqlProcessing<Fund_Company>.ExeQuerys(sql);
+        }
         public IList<Fund_Company> GetData(int pageSize, int pageIndex, ref int pageNum,
                                             ref int TotalPages,string Where,string OrderBy)
         {
@@ -38,7 +43,7 @@ namespace FinancialAssistant.Services.Fund
                 sql = sql + " " + Where;
             if (!string.IsNullOrWhiteSpace(OrderBy))
                 sql = sql + " " + OrderBy;
-            return SqlProcessing<Fund_Company>.Paging(sql, pageSize, pageIndex,ref pageNum,ref TotalPages);
+            return SqlProcessing<Fund_Company>.Paging(sql, pageSize, pageIndex,ref pageNum/*,ref TotalPages*/);
         }
         public int GetCount()
         {

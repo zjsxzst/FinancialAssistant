@@ -166,7 +166,6 @@ namespace FinancialAssistant.WinFrom.FundCompany
                     MessageBox.Show("页数不能为负数！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
-
         private void BT_NextPage_Click(object sender, EventArgs e)
         {
             int PageNum = 0, PageCount = 0;

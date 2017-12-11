@@ -30,8 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BT_TextClone = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.markTextBox2 = new FinancialAssistant.Widget.Text.MarkTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.markTextBox1 = new FinancialAssistant.Widget.Text.MarkTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,9 +54,6 @@
             this.添加ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.markTextBox2 = new FinancialAssistant.Widget.Text.MarkTextBox();
-            this.markTextBox1 = new FinancialAssistant.Widget.Text.MarkTextBox();
-            this.BT_TextClone = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -75,6 +75,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "高级搜索";
             // 
+            // BT_TextClone
+            // 
+            this.BT_TextClone.Location = new System.Drawing.Point(491, 27);
+            this.BT_TextClone.Name = "BT_TextClone";
+            this.BT_TextClone.Size = new System.Drawing.Size(75, 23);
+            this.BT_TextClone.TabIndex = 5;
+            this.BT_TextClone.Text = "清空";
+            this.BT_TextClone.UseVisualStyleBackColor = true;
+            this.BT_TextClone.Click += new System.EventHandler(this.BT_TextClone_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(380, 27);
@@ -85,6 +95,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // markTextBox2
+            // 
+            this.markTextBox2.Location = new System.Drawing.Point(74, 29);
+            this.markTextBox2.Name = "markTextBox2";
+            this.markTextBox2.Size = new System.Drawing.Size(100, 21);
+            this.markTextBox2.TabIndex = 3;
+            this.markTextBox2.WaterText = "请输入ID";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -93,6 +111,14 @@
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 2;
             this.label2.Text = "ID：";
+            // 
+            // markTextBox1
+            // 
+            this.markTextBox1.Location = new System.Drawing.Point(258, 29);
+            this.markTextBox1.Name = "markTextBox1";
+            this.markTextBox1.Size = new System.Drawing.Size(100, 21);
+            this.markTextBox1.TabIndex = 1;
+            this.markTextBox1.WaterText = "请输入公司名";
             // 
             // label1
             // 
@@ -269,32 +295,6 @@
             this.删除ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.删除ToolStripMenuItem.Text = "删除";
             this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
-            // 
-            // markTextBox2
-            // 
-            this.markTextBox2.Location = new System.Drawing.Point(74, 29);
-            this.markTextBox2.Name = "markTextBox2";
-            this.markTextBox2.Size = new System.Drawing.Size(100, 21);
-            this.markTextBox2.TabIndex = 3;
-            this.markTextBox2.WaterText = "请输入ID";
-            // 
-            // markTextBox1
-            // 
-            this.markTextBox1.Location = new System.Drawing.Point(258, 29);
-            this.markTextBox1.Name = "markTextBox1";
-            this.markTextBox1.Size = new System.Drawing.Size(100, 21);
-            this.markTextBox1.TabIndex = 1;
-            this.markTextBox1.WaterText = "请输入公司名";
-            // 
-            // BT_TextClone
-            // 
-            this.BT_TextClone.Location = new System.Drawing.Point(490, 29);
-            this.BT_TextClone.Name = "BT_TextClone";
-            this.BT_TextClone.Size = new System.Drawing.Size(75, 23);
-            this.BT_TextClone.TabIndex = 5;
-            this.BT_TextClone.Text = "清空";
-            this.BT_TextClone.UseVisualStyleBackColor = true;
-            this.BT_TextClone.Click += new System.EventHandler(this.BT_TextClone_Click);
             // 
             // FM_FCList
             // 

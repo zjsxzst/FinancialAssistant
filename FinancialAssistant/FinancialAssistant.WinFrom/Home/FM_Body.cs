@@ -1,4 +1,5 @@
 ﻿using FinancialAssistant.WinFrom.FundCompany;
+using FinancialAssistant.WinFrom.FundName;
 using FinancialAssistant.WinFrom.List;
 using System;
 using System.Collections.Generic;
@@ -27,8 +28,10 @@ namespace FinancialAssistant.WinFrom
 
         private void 列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FM_List FL = new FM_List();
-            FL.Show();
+            //FM_List FL = new FM_List();
+            //FL.Show();
+            FM_FNList FF = new FM_FNList();
+            FF.Show();
         }
 
         private void FM_Body_FormClosed(object sender, FormClosedEventArgs e)

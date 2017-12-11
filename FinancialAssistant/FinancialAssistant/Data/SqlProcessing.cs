@@ -124,9 +124,9 @@ namespace FinancialAssistant.Data
         /// <param name="pageNum">当前页条数</param>
         /// <param name="TotalPages">总条数</param>
         /// <returns></returns>
-        public static IList<T> Paging(string Sql, int pageSize, int pageIndex, ref int pageNum, ref int TotalPages)
+        public static IList<T> Paging(string Sql, int pageSize, int pageIndex, ref int pageNum/*, ref int TotalPages*/)
         {
-            TotalPages = TotalPage(Sql) / pageSize;
+            //TotalPages = TotalPage(Sql) / pageSize;
             return PagingBase(Sql, pageSize, pageIndex, ref pageNum);
         }
     }
