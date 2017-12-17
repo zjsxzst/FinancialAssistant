@@ -12,12 +12,17 @@ namespace FinancialAssistant.Services.Fund
     {
         public bool Update(Fund_HoldAPosition FN)
         {
-            string sql = string.Format("UPDATE Fund_HoldAPosition SET [FundId] = {0},[UnitPrice]={1} WHERE ID={2} ", FN.Quantity,FN.UnitPrice, FN.ID);
+            string sql = string.Format("UPDATE Fund_HoldAPosition SET [FundId] = {0},[UnitPrice]={1} WHERE ID='{2}' ", FN.Quantity,FN.UnitPrice, FN.ID);
             return SqlProcessing.ExeNoQuery(sql);
         }
         public bool Insert(Fund_HoldAPosition FN)
         {
-            string sql = string.Format("INSERT INTO Fund_HoldAPosition (ID,Quantity,UnitPrice) VALUES ({0},{1},{2})", FN.ID, FN.Quantity,FN.UnitPrice);
+            string sql = string.Format("INSERT INTO Fund_HoldAPosition (ID,Quantity,UnitPrice) VALUES ('{0}',{1},{2})", FN.ID, FN.Quantity,FN.UnitPrice);
+            return SqlProcessing.ExeNoQuery(sql);
+        }
+        public bool Delete(string Id)
+        {
+            string sql = "Delete from Fund_HoldAPosition where Id='" + Id + "'";
             return SqlProcessing.ExeNoQuery(sql);
         }
     }

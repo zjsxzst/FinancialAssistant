@@ -1,5 +1,6 @@
 ﻿using FinancialAssistant.WinFrom.FundCompany;
 using FinancialAssistant.WinFrom.FundName;
+using FinancialAssistant.WinFrom.HoldAPosition;
 using FinancialAssistant.WinFrom.List;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,12 @@ namespace FinancialAssistant.WinFrom
         {
             FM_FCList FC = new FM_FCList();
             FC.Show();
+        }
+
+        private void 持仓列表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FM_HoldAPositionList FH = new FM_HoldAPositionList();
+            FH.Show();
         }
     }
 }

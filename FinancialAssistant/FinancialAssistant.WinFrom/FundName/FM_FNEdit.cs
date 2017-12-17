@@ -37,7 +37,7 @@ namespace FinancialAssistant.WinFrom.FundName
         private void BT_Save_Click(object sender, EventArgs e)
         {
             Fund_Name FN = new Fund_Name();
-            FN.ID = int.Parse(markTextBox2.Text);
+            FN.ID =markTextBox2.Text;
             FN.FundName = markTextBox1.Text;
             FN.CompanyID = int.Parse(ComBox_Company.SelectedValue.ToString());
             if(BZ)

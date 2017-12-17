@@ -8,11 +8,12 @@ namespace FinancialAssistant.DoMain.Fund
 {
     public class Fund_HoldAPositionBat
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         public int FundId { get; set; }
-        public double UnitPrice { get; set; }
-        public double Quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Quantity { get; set; }
+        public DateTime InputDate { get; set; }
         public int Type { get; set; }
     }
 }

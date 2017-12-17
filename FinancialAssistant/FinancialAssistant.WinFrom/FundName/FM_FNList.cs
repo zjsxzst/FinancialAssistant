@@ -398,6 +398,11 @@ namespace FinancialAssistant.WinFrom.FundName
             Edit();
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
         private void Create()
         {
             FM_FNEdit FCE = new FM_FNEdit();

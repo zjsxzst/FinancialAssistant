@@ -18,7 +18,7 @@ namespace FinancialAssistant.WinFrom.APP
         /// <param name="Pagination">页数</param>
         /// <param name="dataGridView"></param>
         /// <param name="Data">数据</param>
-        public void HomePage(int Count, ComboBox ComboBox,ComboBox Pagination,DataGridView dataGridView, IList<T> Data)
+        public static void HomePage(int Count, ComboBox ComboBox,ComboBox Pagination,DataGridView dataGridView, IList<T> Data)
         {
             //int Count = V_HoldAPositionService.GetCount();
             List<int> data = new List<int>();
@@ -41,7 +41,7 @@ namespace FinancialAssistant.WinFrom.APP
         /// <param name="Pagination">页数</param>
         /// <param name="dataGridView"></param>
         /// <param name="Data">数据</param>
-        public void PageUp(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
+        public static void PageUp(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
         {
             List<int> data = new List<int>();
             int page = int.Parse(Pagination.Text);
@@ -73,7 +73,7 @@ namespace FinancialAssistant.WinFrom.APP
         /// <param name="Pagination">页数</param>
         /// <param name="dataGridView"></param>
         /// <param name="Data">数据</param>
-        public void PageSkip(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
+        public static void PageSkip(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
         {
             List<int> data = new List<int>();
             int page = int.Parse(Pagination.Text);
@@ -118,7 +118,7 @@ namespace FinancialAssistant.WinFrom.APP
         /// <param name="Pagination">页数</param>
         /// <param name="dataGridView"></param>
         /// <param name="Data">数据</param>
-        public void NextPage(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
+        public static void NextPage(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
         {
             List<int> data = new List<int>();
             int page = int.Parse(Pagination.Text);
@@ -150,7 +150,7 @@ namespace FinancialAssistant.WinFrom.APP
         /// <param name="Pagination">页数</param>
         /// <param name="dataGridView"></param>
         /// <param name="Data">数据</param>
-        public void TrailerPage(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
+        public static void TrailerPage(int Count, ComboBox ComboBox, ComboBox Pagination, DataGridView dataGridView, IList<T> Data)
         {
             List<int> data = new List<int>();
             int num = Count / int.Parse(ComboBox.Text) + 1, startnum = int.Parse(Pagination.Text);

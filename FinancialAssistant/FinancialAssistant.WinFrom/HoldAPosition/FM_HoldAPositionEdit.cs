@@ -24,9 +24,9 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
         private void button1_Click(object sender, EventArgs e)
         {
             Fund_HoldAPosition FHAP = new Fund_HoldAPosition();
-            FHAP.ID = int.Parse(comboBox1.SelectedValue.ToString());
-            FHAP.Quantity = Double.Parse(markTextBox1.Text);
-            FHAP.UnitPrice = Double.Parse(markTextBox2.Text);
+            FHAP.ID = comboBox1.SelectedValue.ToString();
+            FHAP.Quantity = Decimal.Parse(markTextBox1.Text);
+            FHAP.UnitPrice = Decimal.Parse(markTextBox2.Text);
             Fund_HoldAPositionServices.Insert(FHAP);
             this.Close();
         }

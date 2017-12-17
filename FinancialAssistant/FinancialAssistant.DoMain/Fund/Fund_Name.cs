@@ -8,7 +8,7 @@ namespace FinancialAssistant.DoMain.Fund
 {
     public class Fund_Name
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string FundName { get;set;}
         public int CompanyID { get; set; }
 

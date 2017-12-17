@@ -202,6 +202,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(672, 296);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             // 
             // ID
@@ -305,26 +306,26 @@
             this.修改ToolStripMenuItem1,
             this.删除ToolStripMenuItem1});
             this.LISTStrip.Name = "LISTStrip";
-            this.LISTStrip.Size = new System.Drawing.Size(153, 92);
+            this.LISTStrip.Size = new System.Drawing.Size(101, 70);
             // 
             // 添加ToolStripMenuItem1
             // 
             this.添加ToolStripMenuItem1.Name = "添加ToolStripMenuItem1";
-            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.添加ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.添加ToolStripMenuItem1.Text = "添加";
             this.添加ToolStripMenuItem1.Click += new System.EventHandler(this.添加ToolStripMenuItem1_Click);
             // 
             // 修改ToolStripMenuItem1
             // 
             this.修改ToolStripMenuItem1.Name = "修改ToolStripMenuItem1";
-            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.修改ToolStripMenuItem1.Text = "修改";
             this.修改ToolStripMenuItem1.Click += new System.EventHandler(this.修改ToolStripMenuItem1_Click);
             // 
             // 删除ToolStripMenuItem1
             // 
             this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.删除ToolStripMenuItem1.Text = "删除";
             this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem1_Click);
             // 

@@ -64,6 +64,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.持仓列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -274,7 +275,8 @@
             // 
             this.基础数据ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.持仓ToolStripMenuItem,
-            this.列表ToolStripMenuItem});
+            this.列表ToolStripMenuItem,
+            this.持仓列表ToolStripMenuItem});
             this.基础数据ToolStripMenuItem.Name = "基础数据ToolStripMenuItem";
             this.基础数据ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.基础数据ToolStripMenuItem.Text = "基础数据";
@@ -342,6 +344,13 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // 持仓列表ToolStripMenuItem
+            // 
+            this.持仓列表ToolStripMenuItem.Name = "持仓列表ToolStripMenuItem";
+            this.持仓列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.持仓列表ToolStripMenuItem.Text = "持仓列表";
+            this.持仓列表ToolStripMenuItem.Click += new System.EventHandler(this.持仓列表ToolStripMenuItem_Click);
+            // 
             // FM_Body
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -397,5 +406,6 @@
         private System.Windows.Forms.ToolStripMenuItem 持仓ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 列表ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 持仓列表ToolStripMenuItem;
     }
 }
