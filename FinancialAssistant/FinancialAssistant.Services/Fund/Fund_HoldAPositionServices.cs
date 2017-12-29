@@ -10,19 +10,25 @@ namespace FinancialAssistant.Services.Fund
 {
     public class Fund_HoldAPositionServices
     {
+        Fund_HoldAPosition Entity = new Fund_HoldAPosition();
         public bool Update(Fund_HoldAPosition FN)
         {
-            string sql = string.Format("UPDATE Fund_HoldAPosition SET [FundId] = {0},[UnitPrice]={1} WHERE ID='{2}' ", FN.Quantity,FN.UnitPrice, FN.ID);
+            string sql = GroupSQL.Update(FN, "ID='"+FN.ID+"'");
             return SqlProcessing.ExeNoQuery(sql);
+        }
+        public IList<Fund_HoldAPosition> GetData(string Id)
+        {
+            string sql = GroupSQL.Select(Entity, "Id ='" + Id + "'");
+            return SqlProcessing<Fund_HoldAPosition>.ExeQuerys(sql);
         }
         public bool Insert(Fund_HoldAPosition FN)
         {
-            string sql = string.Format("INSERT INTO Fund_HoldAPosition (ID,Quantity,UnitPrice) VALUES ('{0}',{1},{2})", FN.ID, FN.Quantity,FN.UnitPrice);
+            string sql = GroupSQL.Insert(FN);
             return SqlProcessing.ExeNoQuery(sql);
         }
         public bool Delete(string Id)
         {
-            string sql = "Delete from Fund_HoldAPosition where Id='" + Id + "'";
+            string sql = GroupSQL.Delect(Entity, "Id ='" + Id + "'");
             return SqlProcessing.ExeNoQuery(sql);
         }
     }

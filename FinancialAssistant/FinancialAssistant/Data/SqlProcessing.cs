@@ -206,6 +206,15 @@ namespace FinancialAssistant.Data
             }
         }
         /// <summary>
+        /// 获取当前表
+        /// </summary>
+        /// <returns></returns>
+        public static string GetT<T>(T t)
+        {
+            string[] Temp = typeof(T).ToString().Split('.');
+            return Temp[Temp.Length - 1];
+        }
+        /// <summary>
         /// 基础分页
         /// </summary>
         /// <param name="sql"></param>

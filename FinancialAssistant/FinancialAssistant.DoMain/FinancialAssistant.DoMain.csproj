@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fund\Fund_ActualAmount.cs" />
     <Compile Include="Fund\Fund_Company.cs" />
     <Compile Include="Fund\Fund_HoldAPosition.cs" />
     <Compile Include="Fund\Fund_HoldAPositionBat.cs" />

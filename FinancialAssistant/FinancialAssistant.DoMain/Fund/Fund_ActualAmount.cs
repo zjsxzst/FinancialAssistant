@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancialAssistant.DoMain.V
+namespace FinancialAssistant.DoMain.Fund
 {
-    public class V_FundName
+    public class Fund_ActualAmount
     {
         /// <summary>
-        /// Id
+        /// 基金号
         /// </summary>
         public string ID { get; set; }
         /// <summary>
-        /// 基金名
+        /// 订单号
         /// </summary>
-        public string FundName { get; set; }
+        public string OrderNumber { get; set; }
         /// <summary>
-        /// 公司名
+        /// 总金额
         /// </summary>
-        public string CompanyName { get; set; }
+        public decimal Amount { get; set; }
     }
 }
