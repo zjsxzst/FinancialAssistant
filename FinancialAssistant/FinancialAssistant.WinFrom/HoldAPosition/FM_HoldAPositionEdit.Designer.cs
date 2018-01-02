@@ -112,6 +112,7 @@
             this.RadioBuy.TabStop = true;
             this.RadioBuy.Text = "买入";
             this.RadioBuy.UseVisualStyleBackColor = true;
+            this.RadioBuy.CheckedChanged += new System.EventHandler(this.RadioBuy_CheckedChanged);
             // 
             // RadioSell
             // 
@@ -122,6 +123,7 @@
             this.RadioSell.TabIndex = 19;
             this.RadioSell.Text = "卖出";
             this.RadioSell.UseVisualStyleBackColor = true;
+            this.RadioSell.CheckedChanged += new System.EventHandler(this.RadioSell_CheckedChanged);
             // 
             // label4
             // 
@@ -174,7 +176,7 @@
             this.markTextBox1.Name = "markTextBox1";
             this.markTextBox1.Size = new System.Drawing.Size(163, 21);
             this.markTextBox1.TabIndex = 10;
-            this.markTextBox1.WaterText = "请输入持仓量";
+            this.markTextBox1.WaterText = "请输入购买金额";
             // 
             // label6
             // 

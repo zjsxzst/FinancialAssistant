@@ -22,15 +22,33 @@ namespace FinancialAssistant.Data
         {
             string[] T_Table = typeof(T).ToString().Split('.');
             string Table = T_Table[T_Table.Length - 1];
-            string sql = string.Format("INSERT INTO {0} VALUES (", Table);
-            object[] List = ReflectClass.GetElementValueList(t);
-            for(int i=0;i<List.Length;i++)
+            ArrayList Name = new ArrayList();
+            ArrayList Value = new ArrayList();
+            ReflectClass.GetList(t, ref Name, ref Value);
+            object[] Names = (object[])Name.ToArray(typeof(object));
+            object[] Values = (object[])Value.ToArray(typeof(object));
+            List<string> TableList = SqlProcessing.GetColumns(Table);
+            string DName = "", DValue = "";
+            for (int i = 0; i < Names.Length; i++)
             {
-                if(i<List.Length-1)
-                    sql += string.Format("'{0}',", List[i]);
-                else
-                    sql += string.Format("'{0}')", List[i]);
+                if (TableList.Contains(Names[i].ToString().ToUpper()))
+                {
+                    DName += string.Format("[{0}],", Names[i]);
+                    DValue += string.Format("'{0}',", Values[i]);
+                }
+
             }
+            if (!string.IsNullOrWhiteSpace(DName))
+            {
+                if (DName.Substring(DName.Length - 1, 1) == ",")
+                    DName = DName.Substring(0, DName.Length - 1);
+            }
+            if (!string.IsNullOrWhiteSpace(DValue))
+            {
+                if (DValue.Substring(DValue.Length - 1, 1) == ",")
+                    DValue = DValue.Substring(0, DValue.Length - 1);
+            }
+            string sql = string.Format("INSERT INTO {0} ({1})VALUES ({2})", Table, DName, DValue);
             return sql;
         }
         /// <summary>
@@ -40,22 +58,25 @@ namespace FinancialAssistant.Data
         /// <param name="t">实例类</param>
         /// <param name="Where">筛选条件</param>
         /// <returns></returns>
-        public static string Update<T>(T t,string Where)
+        public static string Update<T>(T t, string Where)
         {
             string[] T_Table = typeof(T).ToString().Split('.');
             string Table = T_Table[T_Table.Length - 1];
             string sql = string.Format("UPDATE {0} SET ", Table);
-            ArrayList Name=new ArrayList(),Value=new ArrayList();
+            ArrayList Name = new ArrayList(), Value = new ArrayList();
             ReflectClass.GetList(t, ref Name, ref Value);
-            object[] NameList= (object[])Name.ToArray(typeof(object));
+            object[] NameList = (object[])Name.ToArray(typeof(object));
             object[] ValueList = (object[])Value.ToArray(typeof(object));
-            
+            List<string> TableList = SqlProcessing.GetColumns(Table);
             for (int i = 0; i < NameList.Length; i++)
             {
-                if (i < NameList.Length - 1)
+                if (TableList.Contains(NameList[i].ToString().ToUpper()))
                     sql += string.Format("{0}='{1}',", NameList[i], ValueList[i]);
-                else
-                    sql += string.Format("{0}='{1}'", NameList[i], ValueList[i]);
+            }
+            if (!string.IsNullOrWhiteSpace(sql))
+            {
+                if (sql.Substring(sql.Length - 1, 1) == ",")
+                    sql = sql.Substring(0, sql.Length - 1);
             }
             if (!string.IsNullOrWhiteSpace(Where))
                 sql += " Where " + Where;
@@ -68,7 +89,7 @@ namespace FinancialAssistant.Data
         /// <param name="t">实例类</param>
         /// <param name="Where">筛选条件</param>
         /// <returns></returns>
-        public static string Select<T>(T t,string Where)
+        public static string Select<T>(T t, string Where)
         {
             string sql = string.Format("select * From {0}", SqlProcessing.GetT(t));
             if (!string.IsNullOrWhiteSpace(Where))
@@ -82,7 +103,7 @@ namespace FinancialAssistant.Data
         /// <param name="t">实例类</param>
         /// <param name="Where">筛选条件</param>
         /// <returns></returns>
-        public static string Delect<T>(T t,string Where)
+        public static string Delect<T>(T t, string Where)
         {
             string sql = string.Format("Delect * From {0}", SqlProcessing.GetT(t));
             if (!string.IsNullOrWhiteSpace(Where))

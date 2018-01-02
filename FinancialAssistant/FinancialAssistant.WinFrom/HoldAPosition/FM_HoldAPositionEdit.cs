@@ -29,7 +29,8 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
             decimal TotalNumber = 0;
             Fund_HoldAPositionBat FHPB = new Fund_HoldAPositionBat();
             FHPB.ID = comboBox1.SelectedValue.ToString();
-            FHPB.Monetary = Decimal.Parse(markTextBox1.Text)*(1-(decimal.Parse(markTextBox3.Text)*100));
+            FHPB.Monetary = Decimal.Parse(markTextBox1.Text);
+            FHPB.ArrivalAmount = Decimal.Parse(markTextBox1.Text) * (1 - (decimal.Parse(markTextBox3.Text)/ 100));
             FHPB.UnitPrice= Decimal.Parse(markTextBox2.Text);
             FHPB.InputDate = dateTimePicker1.Value;
             if (RadioSell.Checked)
@@ -54,25 +55,27 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                 //decimal Temp = item.Quantity * item.UnitPrice;
                 if (item.Type == 1)
                 {
-                    //Surplus += Temp;
+                    //买入按照金额/当天单价计算，得到的份额为(金额-手续费)/单价
+                    Surplus += item.ArrivalAmount;
                     TotalNumber += item.ArrivalAmount / item.UnitPrice;
                 }
                 else
                 {
-                    //Surplus -= Temp;
-                    TotalNumber -= item.ArrivalAmount / item.UnitPrice;
+                    //卖出按照份数*单价计算，所得为单价*份数-手续费
+                    Surplus -= item.Monetary;
+                    TotalNumber -= item.Monetary / item.UnitPrice;
                 }
             }
-            //if (FHPB.Type == 1)
-            //{
-            //    Surplus += FHPB.Quantity * FHPB.UnitPrice;
-            //    TotalNumber += FHPB.Quantity;
-            //}
-            //else
-            //{
-            //    Surplus -= FHPB.Quantity * FHPB.UnitPrice;
-            //    TotalNumber -= FHPB.Quantity;
-            //}
+            if (FHPB.Type == 1)
+            {
+                Surplus += FHPB.ArrivalAmount;
+                TotalNumber += FHPB.ArrivalAmount/FHPB.UnitPrice;
+            }
+            else
+            {
+                Surplus -= FHPB.Monetary;
+                TotalNumber -= FHPB.Monetary/FHPB.UnitPrice;
+            }
             FHPB.Residue = Surplus;
             Fund_HoldAPositionBatServices.Insert(FHPB);
             //decimal prices = 0;
@@ -106,13 +109,18 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
 
         private void button3_Click(object sender, EventArgs e)
         {
-            User u = new User();
-            u.name = "ahbool";
-            u.gender = "男";
-            u.DT = DateTime.Now;
-            object[] b=ReflectClass.GetElementNameList(u);
-            object[] c = ReflectClass.GetElementValueList(u);
-            string a = getProperties(u);
+            List<string> a = SqlProcessing.GetAllTable();
+            for(int i=0;i<a.Count;i++)
+            {
+                List<string> b = SqlProcessing.GetColumns(a[i]);
+            }
+            //User u = new User();
+            //u.name = "ahbool";
+            //u.gender = "男";
+            //u.DT = DateTime.Now;
+            //object[] b=ReflectClass.GetElementNameList(u);
+            //object[] c = ReflectClass.GetElementValueList(u);
+            //string a = getProperties(u);
         }
         public string getProperties<T>(T t)
         {
@@ -141,6 +149,19 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                 }
             }
             return tStr;
+        }
+
+        private void RadioSell_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Text = "份数：";
+            markTextBox1.WaterText = "请输入卖出份数";
+        }
+
+        private void RadioBuy_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Text = "金额：";
+            markTextBox1.WaterText = "请输入购买金额";
+            
         }
     }
     public class User

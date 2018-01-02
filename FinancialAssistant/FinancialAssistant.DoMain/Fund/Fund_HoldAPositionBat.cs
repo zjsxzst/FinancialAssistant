@@ -31,6 +31,7 @@ namespace FinancialAssistant.DoMain.Fund
         /// <summary>
         /// 实际金额
         /// </summary>
+        /// 
         public decimal ArrivalAmount { get; set; }
         /// <summary>
         /// 操作日期
@@ -48,6 +49,5 @@ namespace FinancialAssistant.DoMain.Fund
         /// 类型
         /// </summary>
         public int Type { get; set; }
-       
     }
 }

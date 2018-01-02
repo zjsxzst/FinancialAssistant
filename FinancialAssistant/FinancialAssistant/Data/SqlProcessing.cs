@@ -176,6 +176,24 @@ namespace FinancialAssistant.Data
                 return false;
             }
         }
+        public static List<string> GetAllTable()
+        {
+            string sql = "SELECT name FROM sysobjects WHERE (OBJECTPROPERTY(id, N'IsUserTable') = 1)";
+            DataTable Dt = ExeQuery(sql);
+            List<string> List = new List<string>();
+            for(int i=0;i<Dt.Rows.Count;i++)
+                List.Add(Dt.Rows[i]["name"].ToString());
+            return List;
+        }
+        public static List<string> GetColumns(string table)
+        {
+            string sql = string.Format("select COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH from information_schema.columns where TABLE_NAME='{0}'", table);
+            DataTable Dt = ExeQuery(sql);
+            List<string> List = new List<string>();
+            for (int i = 0; i < Dt.Rows.Count; i++)
+                List.Add(Dt.Rows[i]["COLUMN_NAME"].ToString().ToUpper());
+            return List;
+        }
         public static bool DiaoYongShiWu(String[] sql)//事务调用
         {
             Init();
