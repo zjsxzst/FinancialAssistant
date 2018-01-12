@@ -29,14 +29,26 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
             decimal TotalNumber = 0;
             Fund_HoldAPositionBat FHPB = new Fund_HoldAPositionBat();
             FHPB.ID = comboBox1.SelectedValue.ToString();
-            FHPB.Monetary = Decimal.Parse(markTextBox1.Text);
-            FHPB.ArrivalAmount = Decimal.Parse(markTextBox1.Text) * (1 - (decimal.Parse(markTextBox3.Text)/ 100));
+            
+            
             FHPB.UnitPrice= Decimal.Parse(markTextBox2.Text);
             FHPB.InputDate = dateTimePicker1.Value;
             if (RadioSell.Checked)
+            {
+                //卖出按照份数*单价计算，所得为单价*份数-手续费
+                FHPB.Monetary = Decimal.Parse(markTextBox1.Text) * FHPB.UnitPrice;
+                FHPB.ArrivalAmount = Decimal.Parse(markTextBox1.Text) * FHPB.UnitPrice * (1 - (decimal.Parse(markTextBox3.Text) / 100));
                 FHPB.Type = 2;
+            }
+               
             if (RadioBuy.Checked)
+            {
+                //买入按照金额/当天单价计算，得到的份额为(金额-手续费)/单价
+                FHPB.Monetary = Decimal.Parse(markTextBox1.Text);               
+                FHPB.ArrivalAmount = Decimal.Parse(markTextBox1.Text) * (1 - (decimal.Parse(markTextBox3.Text) / 100));
                 FHPB.Type = 1;
+            }
+               
             IList<Fund_HoldAPositionBat> Top1 = Fund_HoldAPositionBatServices.GetTop1("Residue=0 and Id='" + FHPB.ID + "' order by inputdate desc");
             IList<Fund_HoldAPositionBat> List = new List<Fund_HoldAPositionBat>();
             if (Top1.Count>0)
@@ -57,26 +69,30 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                 {
                     //买入按照金额/当天单价计算，得到的份额为(金额-手续费)/单价
                     Surplus += item.ArrivalAmount;
-                    TotalNumber += item.ArrivalAmount / item.UnitPrice;
+                    TotalNumber += item.Quantity;
                 }
                 else
                 {
                     //卖出按照份数*单价计算，所得为单价*份数-手续费
                     Surplus -= item.Monetary;
-                    TotalNumber -= item.Monetary / item.UnitPrice;
+                    TotalNumber -= item.Quantity;
                 }
             }
             if (FHPB.Type == 1)
             {
+                FHPB.Quantity = FHPB.ArrivalAmount / FHPB.UnitPrice;
                 Surplus += FHPB.ArrivalAmount;
-                TotalNumber += FHPB.ArrivalAmount/FHPB.UnitPrice;
+                TotalNumber += FHPB.Quantity;
             }
             else
             {
+                FHPB.Quantity = Decimal.Parse(markTextBox1.Text);
+                //操作金额=份数*数量
                 Surplus -= FHPB.Monetary;
-                TotalNumber -= FHPB.Monetary/FHPB.UnitPrice;
+                TotalNumber -= FHPB.Quantity;
             }
             FHPB.Residue = Surplus;
+            
             Fund_HoldAPositionBatServices.Insert(FHPB);
             //decimal prices = 0;
             Fund_HoldAPosition FHAP = new Fund_HoldAPosition();

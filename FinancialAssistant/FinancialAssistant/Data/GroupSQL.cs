@@ -105,7 +105,7 @@ namespace FinancialAssistant.Data
         /// <returns></returns>
         public static string Delect<T>(T t, string Where)
         {
-            string sql = string.Format("Delect * From {0}", SqlProcessing.GetT(t));
+            string sql = string.Format("Delete From {0}", SqlProcessing.GetT(t));
             if (!string.IsNullOrWhiteSpace(Where))
                 sql += " Where " + Where;
             return sql;
