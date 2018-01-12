@@ -1,4 +1,6 @@
-﻿using FinancialAssistant.WinFrom.FundCompany;
+﻿using FinancialAssistant.Data;
+using FinancialAssistant.DoMain.Fund;
+using FinancialAssistant.WinFrom.FundCompany;
 using FinancialAssistant.WinFrom.FundName;
 using FinancialAssistant.WinFrom.HoldAPosition;
 using FinancialAssistant.WinFrom.List;
@@ -55,6 +57,12 @@ namespace FinancialAssistant.WinFrom
         {
             FM_HoldAPositionList FH = new FM_HoldAPositionList();
             FH.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            test ts = new test();
+            ReflectClass.GetElementNameList(ts);
         }
     }
 }

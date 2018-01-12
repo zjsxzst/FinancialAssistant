@@ -57,6 +57,7 @@
             this.基础数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.持仓ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.持仓列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.内容CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.索引IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,7 +65,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.持仓列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -284,16 +285,23 @@
             // 持仓ToolStripMenuItem
             // 
             this.持仓ToolStripMenuItem.Name = "持仓ToolStripMenuItem";
-            this.持仓ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.持仓ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.持仓ToolStripMenuItem.Text = "持仓";
             this.持仓ToolStripMenuItem.Click += new System.EventHandler(this.持仓ToolStripMenuItem_Click);
             // 
             // 列表ToolStripMenuItem
             // 
             this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.列表ToolStripMenuItem.Text = "列表";
             this.列表ToolStripMenuItem.Click += new System.EventHandler(this.列表ToolStripMenuItem_Click);
+            // 
+            // 持仓列表ToolStripMenuItem
+            // 
+            this.持仓列表ToolStripMenuItem.Name = "持仓列表ToolStripMenuItem";
+            this.持仓列表ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.持仓列表ToolStripMenuItem.Text = "持仓列表";
+            this.持仓列表ToolStripMenuItem.Click += new System.EventHandler(this.持仓列表ToolStripMenuItem_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
@@ -344,18 +352,22 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // 持仓列表ToolStripMenuItem
+            // button1
             // 
-            this.持仓列表ToolStripMenuItem.Name = "持仓列表ToolStripMenuItem";
-            this.持仓列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.持仓列表ToolStripMenuItem.Text = "持仓列表";
-            this.持仓列表ToolStripMenuItem.Click += new System.EventHandler(this.持仓列表ToolStripMenuItem_Click);
+            this.button1.Location = new System.Drawing.Point(332, 139);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FM_Body
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 453);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "FM_Body";
@@ -407,5 +419,6 @@
         private System.Windows.Forms.ToolStripMenuItem 列表ToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem 持仓列表ToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }

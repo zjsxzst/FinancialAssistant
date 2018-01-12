@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -50,7 +52,9 @@ namespace FinancialAssistant.Data
             PropertyInfo[] properties = t.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
             foreach (PropertyInfo item in properties)
             {
-                List.Add(item.Name);                
+                List.Add(item.Name);
+                string a = item.Attributes.ToString();
+                Object[] obs = item.GetCustomAttributes(typeof(DescriptionAttribute), false);//获取自定义特性  
             }
             return (object[])List.ToArray(typeof(object));
         }
@@ -66,6 +70,7 @@ namespace FinancialAssistant.Data
             PropertyInfo[] properties = t.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
             foreach (PropertyInfo item in properties)
             {
+                string a =item.Attributes.ToString();
                 List.Add(item.GetValue(t,null));
             }
             return (object[])List.ToArray(typeof(object));
