@@ -15,6 +15,9 @@ namespace FinancialAssistant.DoMain.Fund
         public string L1 { get; set; }
         public string L2{ get; set; }
         public string L3 { get; set; }
+        /// <summary>
+        /// Description==None代表在发射中需要过滤的列
+        /// </summary>
         [Description("None")]
         public string L4 { get; set; }
         public string L5 { get; set; }

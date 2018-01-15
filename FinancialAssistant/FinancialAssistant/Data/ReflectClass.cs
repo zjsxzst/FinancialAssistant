@@ -52,9 +52,16 @@ namespace FinancialAssistant.Data
             PropertyInfo[] properties = t.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
             foreach (PropertyInfo item in properties)
             {
-                List.Add(item.Name);
-                string a = item.Attributes.ToString();
-                Object[] obs = item.GetCustomAttributes(typeof(DescriptionAttribute), false);//获取自定义特性  
+                //List.Add(item.Name);
+                var obs = (DescriptionAttribute[])item.GetCustomAttributes(typeof(DescriptionAttribute), false);//获取自定义特性  
+                if(obs.Length>0)
+                {
+                    if(obs[0].Description!= "None")
+                        List.Add(item.Name);
+                }
+                else
+                    List.Add(item.Name);
+
             }
             return (object[])List.ToArray(typeof(object));
         }
@@ -70,8 +77,16 @@ namespace FinancialAssistant.Data
             PropertyInfo[] properties = t.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
             foreach (PropertyInfo item in properties)
             {
-                string a =item.Attributes.ToString();
-                List.Add(item.GetValue(t,null));
+                var obs = (DescriptionAttribute[])item.GetCustomAttributes(typeof(DescriptionAttribute), false);//获取自定义特性  
+                if (obs.Length > 0)
+                {
+                    if (obs[0].Description != "None")
+                        List.Add(item.GetValue(t, null));
+                }
+                else
+                    List.Add(item.GetValue(t, null));
+                //string a =item.Attributes.ToString();
+
             }
             return (object[])List.ToArray(typeof(object));
         }
@@ -92,8 +107,20 @@ namespace FinancialAssistant.Data
                 PropertyInfo[] properties = t.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
                 foreach (PropertyInfo item in properties)
                 {
-                    Name.Add(item.Name);
-                    Value.Add(item.GetValue(t, null));
+                    var obs = (DescriptionAttribute[])item.GetCustomAttributes(typeof(DescriptionAttribute), false);//获取自定义特性  
+                    if (obs.Length > 0)
+                    {
+                        if (obs[0].Description != "None")
+                        {
+                            Name.Add(item.Name);
+                            Value.Add(item.GetValue(t, null));
+                        }
+                    }
+                    else
+                    {
+                        Name.Add(item.Name);
+                        Value.Add(item.GetValue(t, null));
+                    }                        
                 }
                 //Name=(object[])Names.ToArray(typeof(object));
                 //Value = (object[])Values.ToArray(typeof(object));
