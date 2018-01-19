@@ -31,6 +31,11 @@ namespace FinancialAssistant.Services.Fund
             string sql = GroupSQL.Insert(FN);
             return SqlProcessing.ExeNoQuery(sql);
         }
+        public bool Update(Fund_HoldAPositionBat FB)
+        {
+            string sql = GroupSQL.Update(FB, "OrderNumber='"+FB.OrderNumber+"'");
+            return SqlProcessing.ExeNoQuery(sql);
+        }
         public IList<Fund_HoldAPositionBat> GetTop1(string WAO)
         {
             string sql = "SELECT TOP 1 * FROM Fund_HoldAPositionBat ";

@@ -180,8 +180,23 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
         private void 新增ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FM_HoldAPositionEdit FN = new FM_HoldAPositionEdit();
-            FN.Show();
+            if(FN.ShowDialog() == DialogResult.OK)
+            {
+                COM_Page.Text = "10";
+                int PageNum = 0, PageCount = 0;
+                dataGridView1.DataSource = new BindingList<V_HoldAPosition>(Service.GetData(10, 1, ref PageNum, ""));
+                List<int> data = new List<int>();
+                if (PageNum + 5 > PageCount)
+                    PageNum = PageCount;
+                else
+                    PageNum += 5;
+                for (int i = 1; i <= PageNum; i++)
+                    data.Add(i);
+                COM_Skip.DataSource = new BindingList<int>(data);
+                COM_Skip.Text = "1";
+            }
         }
+
 
         private void Delete()
         {

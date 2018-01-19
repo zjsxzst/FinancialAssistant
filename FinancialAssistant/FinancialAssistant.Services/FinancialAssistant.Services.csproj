@@ -48,6 +48,7 @@
     <Compile Include="Sys\UserServices.cs" />
     <Compile Include="Universal\UniversalServices.cs" />
     <Compile Include="V\V_FundNameService.cs" />
+    <Compile Include="V\V_HoldAPositionBatService.cs" />
     <Compile Include="V\V_HoldAPositionService.cs" />
   </ItemGroup>
   <ItemGroup>

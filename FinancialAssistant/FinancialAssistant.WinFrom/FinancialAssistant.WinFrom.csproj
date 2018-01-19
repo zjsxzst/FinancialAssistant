@@ -71,6 +71,12 @@
     <Compile Include="FundName\FM_FNList.Designer.cs">
       <DependentUpon>FM_FNList.cs</DependentUpon>
     </Compile>
+    <Compile Include="HoldAPositionBat\FM_HoldAPositionBatList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoldAPositionBat\FM_HoldAPositionBatList.Designer.cs">
+      <DependentUpon>FM_HoldAPositionBatList.cs</DependentUpon>
+    </Compile>
     <Compile Include="HoldAPosition\FM_HoldAPositionEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FundName\FM_FNList.resx">
       <DependentUpon>FM_FNList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HoldAPositionBat\FM_HoldAPositionBatList.resx">
+      <DependentUpon>FM_HoldAPositionBatList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HoldAPosition\FM_HoldAPositionEdit.resx">
       <DependentUpon>FM_HoldAPositionEdit.cs</DependentUpon>

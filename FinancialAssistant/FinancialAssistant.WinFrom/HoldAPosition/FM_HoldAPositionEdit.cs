@@ -22,15 +22,36 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
         {
             InitializeComponent();
         }
+        public FM_HoldAPositionEdit(Fund_HoldAPositionBat FB,string CompanyName)
+        {
+            InitializeComponent();
+            comboBox1.Text = CompanyName;
+            markTextBox1.Text = FB.ArrivalAmount.ToString();
+            markTextBox2.Text = FB.UnitPrice.ToString();
+            dateTimePicker1.Text = FB.InputDate.ToString();
+            decimal a = ((FB.Monetary / FB.ArrivalAmount)-1);
+            markTextBox3.Text = (((FB.Monetary / FB.ArrivalAmount)-1 )*100).ToString().Substring(0,4);
+            if (FB.Type == 1)
+                RadioBuy.Checked = true;
+            else if (FB.Type == 2)
+                RadioSell.Checked = true;
+            if (FB.InVain == 1)
+                CHE_InVain.Checked = true;
+            comboBox1.Enabled = false;
+            markTextBox1.Enabled = false;
+            markTextBox2.Enabled = false;
+            markTextBox2.Enabled = false;
+            RadioBuy.Enabled = false;
+            RadioSell.Enabled = false;
+            CHE_InVain.Enabled = true;
 
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             decimal Surplus = 0;
             decimal TotalNumber = 0;
             Fund_HoldAPositionBat FHPB = new Fund_HoldAPositionBat();
-            FHPB.ID = comboBox1.SelectedValue.ToString();
-            
-            
+            FHPB.ID = comboBox1.SelectedValue.ToString();   
             FHPB.UnitPrice= Decimal.Parse(markTextBox2.Text);
             FHPB.InputDate = dateTimePicker1.Value;
             if (RadioSell.Checked)
@@ -64,19 +85,23 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
 
             foreach (var item in List)
             {
-                //decimal Temp = item.Quantity * item.UnitPrice;
-                if (item.Type == 1)
+                //获取未作废的
+                if(item.InVain==0)
                 {
-                    //买入按照金额/当天单价计算，得到的份额为(金额-手续费)/单价
-                    Surplus += item.ArrivalAmount;
-                    TotalNumber += item.Quantity;
-                }
-                else
-                {
-                    //卖出按照份数*单价计算，所得为单价*份数-手续费
-                    Surplus -= item.Monetary;
-                    TotalNumber -= item.Quantity;
-                }
+                    //decimal Temp = item.Quantity * item.UnitPrice;
+                    if (item.Type == 1)
+                    {
+                        //买入按照金额/当天单价计算，得到的份额为(金额-手续费)/单价
+                        Surplus += item.ArrivalAmount;
+                        TotalNumber += item.Quantity;
+                    }
+                    else
+                    {
+                        //卖出按照份数*单价计算，所得为单价*份数-手续费
+                        Surplus -= item.Monetary;
+                        TotalNumber -= item.Quantity;
+                    }
+                }          
             }
             if (FHPB.Type == 1)
             {
@@ -92,13 +117,25 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                 TotalNumber -= FHPB.Quantity;
             }
             FHPB.Residue = Surplus;
-            
-            Fund_HoldAPositionBatServices.Insert(FHPB);
+            if(CHE_InVain.CheckState == CheckState.Checked)
+                FHPB.InVain = 1;
+            else
+                FHPB.InVain = 0;       
+            if (CHE_InVain.Enabled == false)
+            {
+                FHPB.OrderNumber = Guid.NewGuid().ToString();
+                Fund_HoldAPositionBatServices.Insert(FHPB);
+            }           
+            else
+                Fund_HoldAPositionBatServices.Update(FHPB);
             //decimal prices = 0;
             Fund_HoldAPosition FHAP = new Fund_HoldAPosition();
             FHAP.ID = comboBox1.SelectedValue.ToString();
             FHAP.Quantity = TotalNumber;
-            FHAP.UnitPrice = Surplus/ TotalNumber;
+            if (TotalNumber != 0)
+                FHAP.UnitPrice = Surplus / TotalNumber;
+            else
+                FHAP.UnitPrice = 0;
 
             //prices = FHAP.Quantity * FHAP.UnitPrice;
             //if (RadioSell.Checked)
@@ -107,6 +144,7 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                 Fund_HoldAPositionServices.Update(FHAP);
             else
                 Fund_HoldAPositionServices.Insert(FHAP);
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
@@ -123,21 +161,6 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            List<string> a = SqlProcessing.GetAllTable();
-            for(int i=0;i<a.Count;i++)
-            {
-                List<string> b = SqlProcessing.GetColumns(a[i]);
-            }
-            //User u = new User();
-            //u.name = "ahbool";
-            //u.gender = "男";
-            //u.DT = DateTime.Now;
-            //object[] b=ReflectClass.GetElementNameList(u);
-            //object[] c = ReflectClass.GetElementValueList(u);
-            //string a = getProperties(u);
-        }
         public string getProperties<T>(T t)
         {
             string tStr = string.Empty;

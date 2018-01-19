@@ -66,6 +66,7 @@
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button1 = new System.Windows.Forms.Button();
+            this.历史清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -277,7 +278,8 @@
             this.基础数据ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.持仓ToolStripMenuItem,
             this.列表ToolStripMenuItem,
-            this.持仓列表ToolStripMenuItem});
+            this.持仓列表ToolStripMenuItem,
+            this.历史清单ToolStripMenuItem});
             this.基础数据ToolStripMenuItem.Name = "基础数据ToolStripMenuItem";
             this.基础数据ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.基础数据ToolStripMenuItem.Text = "基础数据";
@@ -285,21 +287,21 @@
             // 持仓ToolStripMenuItem
             // 
             this.持仓ToolStripMenuItem.Name = "持仓ToolStripMenuItem";
-            this.持仓ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.持仓ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.持仓ToolStripMenuItem.Text = "持仓";
             this.持仓ToolStripMenuItem.Click += new System.EventHandler(this.持仓ToolStripMenuItem_Click);
             // 
             // 列表ToolStripMenuItem
             // 
             this.列表ToolStripMenuItem.Name = "列表ToolStripMenuItem";
-            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.列表ToolStripMenuItem.Text = "列表";
             this.列表ToolStripMenuItem.Click += new System.EventHandler(this.列表ToolStripMenuItem_Click);
             // 
             // 持仓列表ToolStripMenuItem
             // 
             this.持仓列表ToolStripMenuItem.Name = "持仓列表ToolStripMenuItem";
-            this.持仓列表ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.持仓列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.持仓列表ToolStripMenuItem.Text = "持仓列表";
             this.持仓列表ToolStripMenuItem.Click += new System.EventHandler(this.持仓列表ToolStripMenuItem_Click);
             // 
@@ -362,6 +364,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // 历史清单ToolStripMenuItem
+            // 
+            this.历史清单ToolStripMenuItem.Name = "历史清单ToolStripMenuItem";
+            this.历史清单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.历史清单ToolStripMenuItem.Text = "历史清单";
+            this.历史清单ToolStripMenuItem.Click += new System.EventHandler(this.历史清单ToolStripMenuItem_Click);
+            // 
             // FM_Body
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -420,5 +429,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripMenuItem 持仓列表ToolStripMenuItem;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem 历史清单ToolStripMenuItem;
     }
 }

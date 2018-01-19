@@ -49,5 +49,9 @@ namespace FinancialAssistant.DoMain.Fund
         /// 类型
         /// </summary>
         public int Type { get; set; }
+        /// <summary>
+        /// 是否作废
+        /// </summary>
+        public int InVain { get; set; }
     }
 }

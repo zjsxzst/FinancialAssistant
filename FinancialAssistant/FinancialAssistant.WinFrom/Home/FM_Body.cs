@@ -3,6 +3,7 @@ using FinancialAssistant.DoMain.Fund;
 using FinancialAssistant.WinFrom.FundCompany;
 using FinancialAssistant.WinFrom.FundName;
 using FinancialAssistant.WinFrom.HoldAPosition;
+using FinancialAssistant.WinFrom.HoldAPositionBat;
 using FinancialAssistant.WinFrom.List;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,12 @@ namespace FinancialAssistant.WinFrom
         {
             test ts = new test();
             ReflectClass.GetElementNameList(ts);
+        }
+
+        private void 历史清单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FM_HoldAPositionBatList FH = new FM_HoldAPositionBatList();
+            FH.Show();
         }
     }
 }
