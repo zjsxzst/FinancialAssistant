@@ -167,7 +167,22 @@ namespace FinancialAssistant.WinFrom.HoldAPositionBat
             if(List.Count>0)
             {
                 FM_HoldAPositionEdit FE = new FM_HoldAPositionEdit(List[0], dataGridView1.Rows[index].Cells["FundName"].Value.ToString());
-                FE.Show();
+                if (FE.ShowDialog() == DialogResult.OK)
+                {
+                    COM_Page.Text = "10";
+                    int PageNum = 0, PageCount = 0;
+                    dataGridView1.DataSource = new BindingList<V_HoldAPositionBat>(Service.GetData(10, 1, ref PageNum, ""));
+                    List<int> data = new List<int>();
+                    if (PageNum + 5 > PageCount)
+                        PageNum = PageCount;
+                    else
+                        PageNum += 5;
+                    for (int i = 1; i <= PageNum; i++)
+                        data.Add(i);
+                    COM_Skip.DataSource = new BindingList<int>(data);
+                    COM_Skip.Text = "1";
+                }
+                    //FE.Show();
             }
         }
         private void BT_UpPage_Click(object sender, EventArgs e)

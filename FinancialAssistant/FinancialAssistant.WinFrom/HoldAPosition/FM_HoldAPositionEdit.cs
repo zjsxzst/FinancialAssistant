@@ -18,6 +18,8 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
         FundNameServices FundNameServices = new FundNameServices();
         Fund_HoldAPositionBatServices Fund_HoldAPositionBatServices = new Fund_HoldAPositionBatServices();
         Fund_HoldAPositionServices Fund_HoldAPositionServices = new Fund_HoldAPositionServices();
+        string OrderNumber = string.Empty;
+
         public FM_HoldAPositionEdit()
         {
             InitializeComponent();
@@ -43,7 +45,10 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
             markTextBox2.Enabled = false;
             RadioBuy.Enabled = false;
             RadioSell.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            markTextBox3.Enabled = false;
             CHE_InVain.Enabled = true;
+            OrderNumber = FB.OrderNumber;
 
         }
         private void button1_Click(object sender, EventArgs e)
@@ -86,7 +91,7 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
             foreach (var item in List)
             {
                 //获取未作废的
-                if(item.InVain==0)
+                if(item.InVain==0 && item.OrderNumber!=OrderNumber)
                 {
                     //decimal Temp = item.Quantity * item.UnitPrice;
                     if (item.Type == 1)
@@ -103,19 +108,24 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                     }
                 }          
             }
-            if (FHPB.Type == 1)
+            if(CHE_InVain.CheckState == CheckState.Unchecked)
             {
-                FHPB.Quantity = FHPB.ArrivalAmount / FHPB.UnitPrice;
-                Surplus += FHPB.ArrivalAmount;
-                TotalNumber += FHPB.Quantity;
+                if (FHPB.Type == 1)
+                {
+                    FHPB.Quantity = FHPB.ArrivalAmount / FHPB.UnitPrice;
+                    Surplus += FHPB.ArrivalAmount;
+                    TotalNumber += FHPB.Quantity;
+                }
+                else
+                {
+                    FHPB.Quantity = Decimal.Parse(markTextBox1.Text);
+                    //操作金额=份数*数量
+                    Surplus -= FHPB.Monetary;
+                    TotalNumber -= FHPB.Quantity;
+                }
             }
             else
-            {
-                FHPB.Quantity = Decimal.Parse(markTextBox1.Text);
-                //操作金额=份数*数量
-                Surplus -= FHPB.Monetary;
-                TotalNumber -= FHPB.Quantity;
-            }
+                FHPB.Quantity = FHPB.ArrivalAmount / FHPB.UnitPrice;        
             FHPB.Residue = Surplus;
             if(CHE_InVain.CheckState == CheckState.Checked)
                 FHPB.InVain = 1;
@@ -127,7 +137,11 @@ namespace FinancialAssistant.WinFrom.HoldAPosition
                 Fund_HoldAPositionBatServices.Insert(FHPB);
             }           
             else
+            {
+                if (OrderNumber != string.Empty)
+                    FHPB.OrderNumber = OrderNumber;
                 Fund_HoldAPositionBatServices.Update(FHPB);
+            }                
             //decimal prices = 0;
             Fund_HoldAPosition FHAP = new Fund_HoldAPosition();
             FHAP.ID = comboBox1.SelectedValue.ToString();

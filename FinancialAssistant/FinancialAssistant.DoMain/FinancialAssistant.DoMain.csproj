@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Fund\Fund_ActualAmount.cs" />
     <Compile Include="Fund\Fund_Company.cs" />
+    <Compile Include="Fund\Fund_HistoricalPrice.cs" />
     <Compile Include="Fund\Fund_HoldAPosition.cs" />
     <Compile Include="Fund\Fund_HoldAPositionBat.cs" />
     <Compile Include="Fund\Fund_Name.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sys\User.cs" />
     <Compile Include="Virtual\InitialName.cs" />
+    <Compile Include="V\V_FundHistoricalPrice.cs" />
     <Compile Include="V\V_FundName.cs" />
     <Compile Include="V\V_HoldAPositionBat.cs" />
     <Compile Include="V\V_HoldAPosition.cs" />

@@ -58,6 +58,7 @@
             this.持仓ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.持仓列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.历史清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.内容CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.索引IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,7 @@
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.button1 = new System.Windows.Forms.Button();
-            this.历史清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.每日单价ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -279,7 +280,8 @@
             this.持仓ToolStripMenuItem,
             this.列表ToolStripMenuItem,
             this.持仓列表ToolStripMenuItem,
-            this.历史清单ToolStripMenuItem});
+            this.历史清单ToolStripMenuItem,
+            this.每日单价ToolStripMenuItem});
             this.基础数据ToolStripMenuItem.Name = "基础数据ToolStripMenuItem";
             this.基础数据ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.基础数据ToolStripMenuItem.Text = "基础数据";
@@ -304,6 +306,13 @@
             this.持仓列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.持仓列表ToolStripMenuItem.Text = "持仓列表";
             this.持仓列表ToolStripMenuItem.Click += new System.EventHandler(this.持仓列表ToolStripMenuItem_Click);
+            // 
+            // 历史清单ToolStripMenuItem
+            // 
+            this.历史清单ToolStripMenuItem.Name = "历史清单ToolStripMenuItem";
+            this.历史清单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.历史清单ToolStripMenuItem.Text = "历史清单";
+            this.历史清单ToolStripMenuItem.Click += new System.EventHandler(this.历史清单ToolStripMenuItem_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
@@ -364,12 +373,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // 历史清单ToolStripMenuItem
+            // 每日单价ToolStripMenuItem
             // 
-            this.历史清单ToolStripMenuItem.Name = "历史清单ToolStripMenuItem";
-            this.历史清单ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.历史清单ToolStripMenuItem.Text = "历史清单";
-            this.历史清单ToolStripMenuItem.Click += new System.EventHandler(this.历史清单ToolStripMenuItem_Click);
+            this.每日单价ToolStripMenuItem.Name = "每日单价ToolStripMenuItem";
+            this.每日单价ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.每日单价ToolStripMenuItem.Text = "每日单价";
+            this.每日单价ToolStripMenuItem.Click += new System.EventHandler(this.每日单价ToolStripMenuItem_Click);
             // 
             // FM_Body
             // 
@@ -430,5 +439,6 @@
         private System.Windows.Forms.ToolStripMenuItem 持仓列表ToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem 历史清单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 每日单价ToolStripMenuItem;
     }
 }

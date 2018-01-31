@@ -2,6 +2,7 @@
 using FinancialAssistant.DoMain.Fund;
 using FinancialAssistant.WinFrom.FundCompany;
 using FinancialAssistant.WinFrom.FundName;
+using FinancialAssistant.WinFrom.HistoricalPrice;
 using FinancialAssistant.WinFrom.HoldAPosition;
 using FinancialAssistant.WinFrom.HoldAPositionBat;
 using FinancialAssistant.WinFrom.List;
@@ -69,6 +70,12 @@ namespace FinancialAssistant.WinFrom
         private void 历史清单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FM_HoldAPositionBatList FH = new FM_HoldAPositionBatList();
+            FH.Show();
+        }
+
+        private void 每日单价ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FM_HistoricalPriceList FH = new FM_HistoricalPriceList();
             FH.Show();
         }
     }
