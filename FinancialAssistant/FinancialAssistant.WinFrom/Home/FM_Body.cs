@@ -78,5 +78,11 @@ namespace FinancialAssistant.WinFrom
             FM_HistoricalPriceList FH = new FM_HistoricalPriceList();
             FH.Show();
         }
+
+        private void 数据分析ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FM_HistoricalPriceAnalyze FH = new FM_HistoricalPriceAnalyze();
+            FH.Show();
+        }
     }
 }

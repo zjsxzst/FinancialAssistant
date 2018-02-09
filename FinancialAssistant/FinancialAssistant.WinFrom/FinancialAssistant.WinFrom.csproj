@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +71,12 @@
     </Compile>
     <Compile Include="FundName\FM_FNList.Designer.cs">
       <DependentUpon>FM_FNList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoricalPrice\FM_HistoricalPriceAnalyze.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoricalPrice\FM_HistoricalPriceAnalyze.Designer.cs">
+      <DependentUpon>FM_HistoricalPriceAnalyze.cs</DependentUpon>
     </Compile>
     <Compile Include="HistoricalPrice\FM_HistoricalPriceEdit.cs">
       <SubType>Form</SubType>
@@ -138,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FundName\FM_FNList.resx">
       <DependentUpon>FM_FNList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoricalPrice\FM_HistoricalPriceAnalyze.resx">
+      <DependentUpon>FM_HistoricalPriceAnalyze.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HistoricalPrice\FM_HistoricalPriceEdit.resx">
       <DependentUpon>FM_HistoricalPriceEdit.cs</DependentUpon>
